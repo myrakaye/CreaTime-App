@@ -75,13 +75,23 @@
 //
 
 import * as Font from "expo-font"
-import Design00 from "./App/Design00/Design00"
-import Design01 from "./App/Design01/Design01"
+import Statistics from "./App/Statistics/Statistics"
+import Mainpage from "./App/Mainpage/Mainpage"
 import Home from "./App/Home/Home"
+import TimeCountDay from "./App/TimeCountDay/TimeCountDay"
+import TimeCountNight from "./App/TimeCountNight/TimeCountNight"
+import dataList from "./App/dataList/dataList"
 import React from "react"
+import { Image, StyleSheet, Text, View } from "react-native"
 import { AppLoading } from "expo"
 
+import { TouchableOpacity } from 'react-native-gesture-handler'
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
+
 //add navigation here
+const Stack = createStackNavigator();
 
 export default class App extends React.Component {
 
@@ -109,6 +119,16 @@ export default class App extends React.Component {
 	}
 
 	render() {
-		return <Home/>;
+		return(
+	
+				<NavigationContainer>
+      				<Stack.Navigator initialRouteName="Home">
+        				<Stack.Screen name="Mainpage" component={Mainpage} />
+        				<Stack.Screen name="Statistics" component={Statistics} />
+      				</Stack.Navigator>
+    			</NavigationContainer>
+		);
 	}
 }
+
+
