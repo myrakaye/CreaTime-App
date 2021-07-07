@@ -12,13 +12,15 @@
     "@react-navigation/native": "^5.0.5",
     "@react-navigation/stack": "^5.14.5",
     "expo": "^42.0.0",
+    "expo-constants": "^11.0.1",
     "expo-linear-gradient": "~9.2.0",
     "react": "*",
     "react-dom": "16.13.1",
     "react-native": "*",
     "react-native-gesture-handler": ">= 1.0.0",
     "react-native-safe-area-context": ">= 0.6.0",
-    "react-native-screens": ">= 2.0.0-alpha.0 || >= 2.0.0-beta.0 || >= 2.0.0"
+    "react-native-screens": ">= 2.0.0-alpha.0 || >= 2.0.0-beta.0 || >= 2.0.0",
+    "react-native-svg-charts": "^5.4.0"
   },
   "devDependencies": {
     "babel-preset-expo": "8.3.0"

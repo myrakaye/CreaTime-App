@@ -12,6 +12,8 @@ import React from "react"
 import { Image, StyleSheet, Text, View } from "react-native"
 import { LinearGradient } from "expo-linear-gradient"
 import { TouchableOpacity } from 'react-native-gesture-handler'
+import Constants from 'expo-constants';
+import { ProgressCircle } from 'react-native-svg-charts'
 
 export default class Mainpage extends React.Component {
 	constructor(props) {
@@ -20,6 +22,7 @@ export default class Mainpage extends React.Component {
 			hour: 0,
 			minute: 0,
 			second: 0,
+			total: 0,
 		}
 	}
 
@@ -44,6 +47,11 @@ export default class Mainpage extends React.Component {
 						second: 59,
 					})
 				}
+				else {
+					this.setState({
+						total: 0,
+					})
+				}
 			}
 			else{
 				this.setState({
@@ -57,6 +65,15 @@ export default class Mainpage extends React.Component {
 				second: s - 1
 			}) 
 		}
+	}
+
+	completePortion() {
+		let inTotal = this.state.total
+		let remain = this.state.hour * 3600 + this.state.minute * 60 + this.state.second
+		if(inTotal == 0)
+			return 0
+		else
+			return 1-remain/inTotal
 	}
 
 	static navigationOptions = ({ navigation }) => {
@@ -77,6 +94,7 @@ export default class Mainpage extends React.Component {
 	
 		return <View
 				style={styles.design01View}>
+					
 				<View
 					pointerEvents="box-none"
 					style={{
@@ -85,6 +103,9 @@ export default class Mainpage extends React.Component {
 						marginRight: 40,
 						marginTop: 61,
 					}}>
+						<ProgressCircle style={{ height: 340, marginTop: 10, marginRight: 2 }}
+						 progress={this.completePortion()} progressColor={'rgb(109, 212, 0)'} >
+							</ProgressCircle>
 					<View
 						pointerEvents="box-none"
 						style={{
@@ -112,6 +133,7 @@ export default class Mainpage extends React.Component {
 							</View>
 						</TouchableOpacity>
 						
+					
 						<View
 							style={styles.groupView}>
 							<Text
@@ -123,10 +145,11 @@ export default class Mainpage extends React.Component {
 							
 								<Text style={styles.titleText}> 
 								{this.handle0(this.state.hour)}h : {this.handle0(this.state.minute)}m : {this.handle0(this.state.second)}s </Text>
+							
 						</View>
+						
 					</View>
-					<View
-						style={styles.ovalView}/>
+					
 					<View
 						pointerEvents="box-none"
 						style={{
@@ -205,7 +228,8 @@ export default class Mainpage extends React.Component {
 						hitSlop={{ top: 10, bottom: 50, left: 100, right: 90 }}
 						onPress = {()=>{
 							this.setState({
-								hour: this.state.hour+1
+								hour: this.state.hour+1,
+								total: this.state.total+3600
 							})
 						}}
 					>
@@ -222,12 +246,14 @@ export default class Mainpage extends React.Component {
 							if(this.state.minute == 59) {
 								this.setState({
 									minute: 0,
-									hour: this.state.hour+1
+									hour: this.state.hour+1,
+									total: this.state.total+60
 								})
 							}
 							else {
 								this.setState({
-									minute: this.state.minute+1
+									minute: this.state.minute+1,
+									total: this.state.total+60
 								})
 							}
 						}}
@@ -258,7 +284,12 @@ export default class Mainpage extends React.Component {
 					}}/>
 				<View
 					style={styles.homeIndicatorView}/>
+					<View>
+	
+		  </View>
 			</View>
+
+		
 	}
 }
 
@@ -312,7 +343,7 @@ const styles = StyleSheet.create({
 		alignSelf: "stretch",
 		marginLeft: 10,
 		marginRight: 1,
-		marginTop: 28,
+		marginTop: 32,
 	},
 	rectangleView: {
 		backgroundColor: "white",
