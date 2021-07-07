@@ -14,7 +14,50 @@ import { LinearGradient } from "expo-linear-gradient"
 import { TouchableOpacity } from 'react-native-gesture-handler'
 
 export default class Mainpage extends React.Component {
+	constructor(props) {
+		super(props)
+		this.state = {
+			hour: 0,
+			minute: 0,
+			second: 0,
+		}
+	}
 
+	handle0(num) {
+		if(num < 10)
+			return String(0) + String(num)
+		else
+			return num
+	}
+
+	minusOneSecond() {
+		let h = this.state.hour
+		let m = this.state.minute
+		let s = this.state.second
+
+		if(s == 0) {
+			if(m == 0) {
+				if(h != 0) {
+					this.setState({
+						hour: h - 1,
+						minute: 59,
+						second: 59,
+					})
+				}
+			}
+			else{
+				this.setState({
+					minute: m - 1,
+					second: 59
+				})
+			}
+		}
+		else {
+			this.setState({
+				second: s - 1
+			}) 
+		}
+	}
 
 	static navigationOptions = ({ navigation }) => {
 	
@@ -26,12 +69,8 @@ export default class Mainpage extends React.Component {
 			}
 	}
 
-	constructor(props) {
-		super(props)
-	}
-
 	componentDidMount() {
-	
+		setInterval(()=>{this.minusOneSecond()}, 1000)
 	}
 
 	render() {
@@ -56,18 +95,34 @@ export default class Mainpage extends React.Component {
 							height: 192,
 							alignItems: "flex-start",
 						}}>
-						<Text
-							style={styles.labelTwoText}>Cancel</Text>
+						
+						<TouchableOpacity
+							hitSlop={{ top: 30, bottom: 150, left: 0, right: 80 }}
+							onPress = {()=>{
+								this.setState({
+									hour: 0,
+									minute: 0,
+									second: 0,
+								})
+							}}
+						>
+							<View style={styles.cancelView}>
+							<Text
+								style={styles.labelTwoText}> Clear </Text>
+							</View>
+						</TouchableOpacity>
+						
 						<View
 							style={styles.groupView}>
 							<Text
-								style={styles.titleText}>Enter Time</Text>
+								style={styles.titleText}> Time Left: </Text>
 							<View
 								style={{
 									flex: 1,
 								}}/>
-							<View
-								style={styles.rectangleView}/>
+							
+								<Text style={styles.titleText}> 
+								{this.handle0(this.state.hour)}h : {this.handle0(this.state.minute)}m : {this.handle0(this.state.second)}s </Text>
 						</View>
 					</View>
 					<View
@@ -134,6 +189,7 @@ export default class Mainpage extends React.Component {
 						</LinearGradient>
 					</View>
 				</View>
+				
 				<View
 					pointerEvents="box-none"
 					style={{
@@ -141,41 +197,49 @@ export default class Mainpage extends React.Component {
 						marginLeft: 20,
 						marginRight: 18,
 						marginTop: 31,
+						flexDirection: 'row',
+						justifyContent: 'space-around',
 					}}>
+						
+					<TouchableOpacity
+						hitSlop={{ top: 10, bottom: 50, left: 100, right: 90 }}
+						onPress = {()=>{
+							this.setState({
+								hour: this.state.hour+1
+							})
+						}}
+					>
 					<View
 						style={styles.group7View}>
 						<Text
-							style={styles.nameCopyText}>Add Hours</Text>
+							style={styles.nameCopyText}>Add 1 Hour</Text>
 					</View>
+					</TouchableOpacity>
+
+					<TouchableOpacity
+						hitSlop={{ top: 10, bottom: 50, left: 80, right: 90 }}
+						onPress = {()=>{
+							if(this.state.minute == 59) {
+								this.setState({
+									minute: 0,
+									hour: this.state.hour+1
+								})
+							}
+							else {
+								this.setState({
+									minute: this.state.minute+1
+								})
+							}
+						}}
+					>
 					<View
-						style={styles.group6View}>
-						<View
-							pointerEvents="box-none"
-							style={{
-								position: "absolute",
-								left: 0,
-								right: 0,
-								top: 0,
-								bottom: 0,
-								justifyContent: "center",
-							}}>
-							<Image
-								source={require("./../../assets/images/group-5.png")}
-								style={styles.group5Image}/>
-						</View>
-						<View
-							pointerEvents="box-none"
-							style={{
-								position: "absolute",
-								right: 0,
-								top: 0,
-								bottom: 0,
-								justifyContent: "center",
-							}}>
+						style={styles.group7Right}>										
 							<Text
-								style={styles.nameText}>Add Minutes</Text>
-						</View>
+								style={styles.nameText}>Add 1 Minute</Text>
+	
 					</View>
+					</TouchableOpacity>
+			
 				</View>
 
 				<TouchableOpacity
@@ -203,7 +267,20 @@ const styles = StyleSheet.create({
 		backgroundColor: "rgb(98, 54, 255)",
 		flex: 1,
 	},
+	cancelView: {
+		marginTop: -35,
+		backgroundColor: "rgba(0, 0, 0, 0.2)",
+		borderRadius: 12.83,
+		position: "absolute",
+		marginLeft: 0,
+		width: 70,
+		top: 0,
+		height: 40,
+		justifyContent: "center",
+		alignItems: "flex-start",
+	},
 	labelTwoText: {
+		
 		color: "white",
 		fontFamily: ".AppleSystemUIFont",
 		fontSize: 18,
@@ -212,13 +289,15 @@ const styles = StyleSheet.create({
 		textAlign: "left",
 		lineHeight: 24,
 		backgroundColor: "transparent",
+		marginLeft: 8,
 	},
 	groupView: {
 		backgroundColor: "transparent",
 		alignSelf: "center",
-		width: 179,
+		width: 400,
 		height: 105,
 		marginTop: 63,
+		marginLeft: 60,
 		alignItems: "center",
 	},
 	titleText: {
@@ -231,14 +310,16 @@ const styles = StyleSheet.create({
 		lineHeight: 45,
 		letterSpacing: 0.41,
 		alignSelf: "stretch",
-		marginLeft: 1,
+		marginLeft: 10,
 		marginRight: 1,
+		marginTop: 28,
 	},
 	rectangleView: {
 		backgroundColor: "white",
 		opacity: 0.3,
 		width: 108,
 		height: 2,
+		
 	},
 	ovalView: {
 		backgroundColor: "transparent",
@@ -287,12 +368,24 @@ const styles = StyleSheet.create({
 		backgroundColor: "rgba(0, 0, 0, 0.2)",
 		borderRadius: 12.83,
 		position: "absolute",
-		left: 0,
-		width: 179,
+		marginLeft: -100,
+		width: 170,
 		top: 0,
 		height: 55,
 		justifyContent: "center",
 		alignItems: "flex-start",
+	},
+	group7Right: {
+		backgroundColor: "rgba(0, 0, 0, 0.2)",
+		borderRadius: 12.83,
+		position: "absolute",
+		marginLeft: -80,
+		marginRight: 30,
+		width: 170,
+		top: 0,
+		height: 55,
+		justifyContent: "center",
+		alignItems: "flex-end",
 	},
 	nameCopyText: {
 		backgroundColor: "transparent",
@@ -302,7 +395,7 @@ const styles = StyleSheet.create({
 		fontWeight: "normal",
 		textAlign: "left",
 		lineHeight: 24,
-		marginLeft: 46,
+		marginLeft: 42,
 	},
 	group6View: {
 		backgroundColor: "transparent",
@@ -326,7 +419,7 @@ const styles = StyleSheet.create({
 		textAlign: "left",
 		lineHeight: 24,
 		backgroundColor: "transparent",
-		marginRight: 50,
+		marginRight: 30,
 	},
 	group2View: {
 		backgroundColor: "white",

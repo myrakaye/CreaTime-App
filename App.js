@@ -99,6 +99,9 @@ export default class App extends React.Component {
 		super(props)
 		this.state = {
 			fontsReady: false,
+			second: 0,
+			minute: 0,
+			hour: 0,
 		}
 	}
 
