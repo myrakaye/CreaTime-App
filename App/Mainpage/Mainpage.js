@@ -23,6 +23,7 @@ export default class Mainpage extends React.Component {
 			minute: 0,
 			second: 0,
 			total: 0,
+			complete: 0,
 		}
 	}
 
@@ -37,6 +38,12 @@ export default class Mainpage extends React.Component {
 		let h = this.state.hour
 		let m = this.state.minute
 		let s = this.state.second
+
+		if(h == 0 & m == 0 & s == 1) {
+			this.setState({
+				complete: this.state.complete+1
+			})
+		}
 
 		if(s == 0) {
 			if(m == 0) {
@@ -269,7 +276,14 @@ export default class Mainpage extends React.Component {
 				</View>
 
 				<TouchableOpacity
-					onPress = {()=>this.props.navigation.navigate('Statistics')}
+					onPress = {()=>this.props.navigation.navigate('Statistics', 
+					{
+						hour: this.state.hour,
+						minute: this.state.minute,
+						second: this.state.second,
+						total: this.state.total,
+						complete: this.state.complete
+					})}
 				> 
 				<View
 					style={styles.group2View}>

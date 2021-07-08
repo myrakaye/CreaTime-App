@@ -9,6 +9,8 @@
 import React from "react"
 import { Image, StyleSheet, Text, View } from "react-native"
 
+import { TouchableOpacity } from 'react-native-gesture-handler'
+import Mainpage from "../../App/Mainpage/Mainpage"
 
 export default class Home extends React.Component {
 
@@ -58,14 +60,31 @@ export default class Home extends React.Component {
 								position: "absolute",
 								right: 117,
 								width: 161,
-								top: 452,
+								top: 100,
 								height: 80,
-								alignItems: "flex-end",
+								alignItems: "center",
 							}}>
 							<Text
 								style={styles.creatimeText}>CreaTIME</Text>
 							<Text
 								style={styles.keepYourFocusText}>Keep Your Focus</Text>
+						</View>
+
+						<View 
+							style={{
+								position: "absolute",
+								right: 125,
+								width: 180,
+								top: 500,
+								height: 80,
+								alignItems: "center",
+			
+							}}>
+								<TouchableOpacity
+									onPress = {()=>this.props.navigation.navigate('Mainpage')}
+								> 
+							<Text style={styles.startText}> Start! </Text>
+							</TouchableOpacity>
 						</View>
 					</View>
 				</View>
@@ -80,6 +99,7 @@ const styles = StyleSheet.create({
 		justifyContent: "center",
 	},
 	home2View: {
+		flexDirection: "column",
 		backgroundColor: "transparent",
 		height: 736,
 		justifyContent: "center",
@@ -92,7 +112,7 @@ const styles = StyleSheet.create({
 		backgroundColor: "transparent",
 		resizeMode: "cover",
 		width: null,
-		height: 736,
+		height: 810,
 	},
 	creatimeText: {
 		backgroundColor: "transparent",
@@ -100,6 +120,15 @@ const styles = StyleSheet.create({
 		fontSize: 38.4,
 		fontStyle: "normal",
 		fontWeight: "normal",
+		textAlign: "center",
+	},
+	startText: {
+		fontFamily: "Gill Sans",
+		fontStyle: "normal",
+		backgroundColor: "transparent",
+		color: "white",
+		fontSize: 55,
+		fontWeight: "bold",
 		textAlign: "center",
 	},
 	keepYourFocusText: {

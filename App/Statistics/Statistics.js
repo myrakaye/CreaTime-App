@@ -26,9 +26,18 @@ export default class Design00 extends React.Component {
 			}
 	}
 
+
 	constructor(props) {
 		super(props)
+		this.state = {
+			hour: this.props.route.params.hour,
+			minute: this.props.route.params.minute,
+			second: this.props.route.params.second,
+			total: this.props.route.params.total,
+			complete: this.props.route.params.complete,
+		}
 	}
+
 
 	componentDidMount() {
 	
