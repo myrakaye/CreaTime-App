@@ -22,8 +22,12 @@ export default class Mainpage extends React.Component {
 			hour: 0,
 			minute: 0,
 			second: 0,
+			//used for calculating progress circle
 			total: 0,
+			//the number of times users complete the time counting down
 			complete: 0,
+			//length of time user focus on the screen before clear or exit
+			length: 0,
 		}
 	}
 
@@ -35,6 +39,9 @@ export default class Mainpage extends React.Component {
 	}
 
 	minusOneSecond() {
+		this.setState({
+			length: this.state.length+1
+		})
 		let h = this.state.hour
 		let m = this.state.minute
 		let s = this.state.second
@@ -131,6 +138,8 @@ export default class Mainpage extends React.Component {
 									hour: 0,
 									minute: 0,
 									second: 0,
+									length: 0,
+									total: 0,
 								})
 							}}
 						>

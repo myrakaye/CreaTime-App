@@ -14,6 +14,7 @@
     "expo": "^42.0.0",
     "expo-constants": "^11.0.1",
     "expo-linear-gradient": "~9.2.0",
+    "expo-secure-store": "^10.2.0",
     "react": "*",
     "react-dom": "16.13.1",
     "react-native": "*",

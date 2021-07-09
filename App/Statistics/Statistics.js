@@ -9,9 +9,12 @@
 import Mainpage from "../../App/Mainpage/Mainpage"
 
 import React from "react"
-import { Image, StyleSheet, Text, View } from "react-native"
+import { Image, StyleSheet, Text, View, AppState } from "react-native"
 import { LinearGradient } from "expo-linear-gradient"
 import { TouchableOpacity } from 'react-native-gesture-handler'
+import { useRef, useState, useEffect } from 'react';
+import * as SecureStore from 'expo-secure-store';
+
 
 
 export default class Design00 extends React.Component {
@@ -33,8 +36,12 @@ export default class Design00 extends React.Component {
 			hour: this.props.route.params.hour,
 			minute: this.props.route.params.minute,
 			second: this.props.route.params.second,
+			//used for calculating progress circle
 			total: this.props.route.params.total,
+			//the number of times users complete the time counting down
 			complete: this.props.route.params.complete,
+			//length of time user focus on the screen before clear or exit
+			length: this.props.route.params.complete,
 		}
 	}
 
@@ -63,9 +70,6 @@ export default class Design00 extends React.Component {
 						style={{
 							flex: 1,
 						}}/>
-					<Image
-						source={require("./../../assets/images/group-12.png")}
-						style={styles.group12Image}/>
 				</View>
 				<View
 					pointerEvents="box-none"
@@ -190,7 +194,7 @@ export default class Design00 extends React.Component {
 										flex: 1,
 									}}/>
 								<Text
-									style={styles.monText}>MON</Text>
+									style={styles.monText}> 7.10 </Text>
 							</View>
 							<View
 								style={styles.group9Copy7View}>
@@ -214,7 +218,7 @@ export default class Design00 extends React.Component {
 										flex: 1,
 									}}/>
 								<Text
-									style={styles.tueText}>TUE</Text>
+									style={styles.tueText}>7.11</Text>
 							</View>
 							<View
 								style={styles.group9Copy8View}>
@@ -238,7 +242,7 @@ export default class Design00 extends React.Component {
 										flex: 1,
 									}}/>
 								<Text
-									style={styles.wedText}>WED</Text>
+									style={styles.wedText}> 7.12 </Text>
 							</View>
 							<View
 								style={{
@@ -266,7 +270,7 @@ export default class Design00 extends React.Component {
 										flex: 1,
 									}}/>
 								<Text
-									style={styles.thuText}>THU</Text>
+									style={styles.thuText}> 7.13 </Text>
 							</View>
 							<View
 								style={styles.group9Copy10View}>
@@ -290,7 +294,7 @@ export default class Design00 extends React.Component {
 										flex: 1,
 									}}/>
 								<Text
-									style={styles.friText}>FRI</Text>
+									style={styles.friText}> 7.14 </Text>
 							</View>
 							<View
 								style={styles.group9Copy11View}>
@@ -314,7 +318,7 @@ export default class Design00 extends React.Component {
 										flex: 1,
 									}}/>
 								<Text
-									style={styles.satText}>SAT</Text>
+									style={styles.satText}>7.15</Text>
 							</View>
 							<View
 								style={styles.group9Copy12View}>
@@ -338,7 +342,7 @@ export default class Design00 extends React.Component {
 										flex: 1,
 									}}/>
 								<Text
-									style={styles.sunText}>SUN</Text>
+									style={styles.sunText}>7.16</Text>
 							</View>
 						</View>
 					</View>
@@ -618,9 +622,10 @@ const styles = StyleSheet.create({
 	group9View: {
 		backgroundColor: "transparent",
 		alignSelf: "center",
-		width: 27,
-		height: 243,
+		width: 30,
+		height: 251,
 		marginLeft: 20,
+		marginRight: -7,
 	},
 	rectangleTwoView: {
 		width: "100%",
@@ -631,6 +636,7 @@ const styles = StyleSheet.create({
 		height: 218,
 		marginLeft: 7,
 		marginRight: 6,
+		alignItems: "flex-end",
 	},
 	monText: {
 		backgroundColor: "transparent",
@@ -641,14 +647,16 @@ const styles = StyleSheet.create({
 		fontStyle: "normal",
 		fontWeight: "normal",
 		textAlign: "center",
+		alignItems: "baseline",
 		lineHeight: 13,
 		marginBottom: 1,
 	},
 	group9Copy7View: {
 		backgroundColor: "transparent",
-		width: 22,
-		height: 223,
-		marginLeft: 23,
+		width: 27,
+		height: 225,
+		marginLeft: 25,
+		marginRight: -8,
 		marginTop: 24,
 	},
 	rectangleThreeViewLinearGradient: {
@@ -675,9 +683,9 @@ const styles = StyleSheet.create({
 	},
 	group9Copy8View: {
 		backgroundColor: "transparent",
-		width: 26,
-		height: 201,
-		marginLeft: 24,
+		width: 30,
+		height: 203,
+		marginLeft: 26,
 		marginTop: 46,
 	},
 	rectangleFourView: {
@@ -704,9 +712,9 @@ const styles = StyleSheet.create({
 	},
 	group9Copy9View: {
 		backgroundColor: "transparent",
-		width: 24,
-		height: 207,
-		marginRight: 27,
+		width: 28,
+		height: 209,
+		marginRight: 20,
 		marginTop: 40,
 	},
 	rectangleFiveViewLinearGradient: {
@@ -733,9 +741,9 @@ const styles = StyleSheet.create({
 	},
 	group9Copy10View: {
 		backgroundColor: "transparent",
-		width: 17,
+		width: 21,
 		height: 201,
-		marginRight: 29,
+		marginRight: 22,
 		marginTop: 46,
 	},
 	rectangleSixView: {
@@ -762,9 +770,9 @@ const styles = StyleSheet.create({
 	},
 	group9Copy11View: {
 		backgroundColor: "transparent",
-		width: 22,
-		height: 198,
-		marginRight: 24,
+		width: 27,
+		height: 201,
+		marginRight: 20,
 		marginTop: 49,
 	},
 	rectangleSevenViewLinearGradient: {
@@ -791,8 +799,8 @@ const styles = StyleSheet.create({
 	},
 	group9Copy12View: {
 		backgroundColor: "transparent",
-		width: 24,
-		height: 213,
+		width: 28,
+		height: 215,
 		marginTop: 34,
 	},
 	rectangleEightView: {
