@@ -9,11 +9,17 @@
 import Statistics from "../../App/Statistics/Statistics"
 
 import React from "react"
-import { Image, StyleSheet, Text, View } from "react-native"
+import { Image, StyleSheet, Text, View, AppState } from "react-native"
 import { LinearGradient } from "expo-linear-gradient"
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import Constants from 'expo-constants';
 import { ProgressCircle } from 'react-native-svg-charts'
+import * as SecureStore from 'expo-secure-store'
+import { useRef } from "react"
+
+
+
+const sucessfulSessions = 'timesComplete';
 
 export default class Mainpage extends React.Component {
 	constructor(props) {
@@ -28,6 +34,8 @@ export default class Mainpage extends React.Component {
 			complete: 0,
 			//length of time user focus on the screen before clear or exit
 			length: 0,
+
+			test: ""
 		}
 	}
 
@@ -103,6 +111,41 @@ export default class Mainpage extends React.Component {
 	componentDidMount() {
 		setInterval(()=>{this.minusOneSecond()}, 1000)
 	}
+
+	// Secure Storage 
+	static storeSecure = () => {
+		
+	  
+		const _handleComplete = () => {
+			if (this.state.complete != 0) {
+				
+				getValue().then(
+					(currentStore) => {
+						if (typeof currentStore == "number") {
+							this.setState({
+								complete: complete + 1
+							  })
+							save(sucessfulSessions, this.state.complete)
+						}
+					});
+			}		
+		};
+	  
+		async function save(key, value) {
+		  let stringValue = JSON.stringify(value)
+		  await SecureStore.setItemAsync(key, stringValue);
+		  //console.log("_handleComplete saved to Storage: " + stringValue )
+		}
+	  
+		async function getValue() {
+		  let value = await SecureStore.getItemAsync(sucessfulSessions);
+		  //console.log("Retreived Values: " + values )
+		  return JSON.parse(values);
+	  
+		}
+	  
+	  };
+	
 
 	render() {
 	

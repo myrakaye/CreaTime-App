@@ -42,13 +42,20 @@ export default class Design00 extends React.Component {
 			complete: this.props.route.params.complete,
 			//length of time user focus on the screen before clear or exit
 			length: this.props.route.params.complete,
+
+			test: ""
 		}
 	}
 
 
+	// Access Secure Storage
 	componentDidMount() {
-	
+		SecureStore.getItemAsync('timesComplete').then( storedValue => {
+			this.setState({ test: JSON.stringify(storedValue) });
+		  });
 	}
+
+	
 
 	render() {
 	
@@ -65,7 +72,7 @@ export default class Design00 extends React.Component {
 						alignItems: "flex-start",
 					}}>
 					<Text
-						style={styles.titleText}>My Plan</Text>
+						style={styles.titleText}> {this.state.test} </Text>
 					<View
 						style={{
 							flex: 1,
