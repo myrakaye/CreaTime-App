@@ -15,7 +15,9 @@ import { TouchableOpacity } from 'react-native-gesture-handler'
 import { useRef, useState, useEffect } from 'react';
 import * as SecureStore from 'expo-secure-store';
 
-
+const keyForDate = 'Date'
+const keyForTime = 'Time'
+const keyForLength = 'Length'
 
 export default class Design00 extends React.Component {
 
@@ -42,17 +44,29 @@ export default class Design00 extends React.Component {
 			complete: this.props.route.params.complete,
 			//length of time user focus on the screen before clear or exit
 			length: this.props.route.params.complete,
-
-			test: ""
+			test: "test",
+			date: [],
+			time: [],
 		}
 	}
 
+	async getValueDate() {
+		let value = await SecureStore.getItemAsync(keyForDate);
+		console.log("Retreived Values: " + value )
+		return JSON.parse(value);
+	}
 
 	// Access Secure Storage
 	componentDidMount() {
-		SecureStore.getItemAsync('timesComplete').then( storedValue => {
-			this.setState({ test: JSON.stringify(storedValue) });
-		  });
+		// SecureStore.getItemAsync('timesComplete').then( storedValue => {
+		// 	if(JSON.stringify(storedValue)!=null)
+		// 		this.setState({ test: JSON.stringify(storedValue) });	
+		//   });
+		this.getValueDate().then((dateArray) => {
+			this.setState({
+				date: dateArray
+			})
+		})
 	}
 
 	
@@ -72,7 +86,7 @@ export default class Design00 extends React.Component {
 						alignItems: "flex-start",
 					}}>
 					<Text
-						style={styles.titleText}> {this.state.test} </Text>
+						style={styles.titleText}> {this.state.date} </Text>
 					<View
 						style={{
 							flex: 1,

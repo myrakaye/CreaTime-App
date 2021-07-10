@@ -19,7 +19,10 @@ import { useRef } from "react"
 
 
 
-const sucessfulSessions = 'timesComplete';
+const keyForDate = 'Date'
+const keyForTime = 'Time'
+const keyForLength = 'Length'
+const expKey = 'experiment6'
 
 export default class Mainpage extends React.Component {
 	constructor(props) {
@@ -34,10 +37,16 @@ export default class Mainpage extends React.Component {
 			complete: 0,
 			//length of time user focus on the screen before clear or exit
 			length: 0,
-
-			test: ""
+			appstate: AppState.currentState,
+			test: "nothing",
+			date: [],
+			time: [],
 		}
 	}
+
+
+	
+
 
 	handle0(num) {
 		if(num < 10)
@@ -110,41 +119,81 @@ export default class Mainpage extends React.Component {
 
 	componentDidMount() {
 		setInterval(()=>{this.minusOneSecond()}, 1000)
+		AppState.addEventListener("change", this._handleAppStateChange);
 	}
 
-	// Secure Storage 
-	static storeSecure = () => {
+	componentWillUnmount() {
+		AppState.removeEventListener("change", this._handleAppStateChange);
+	}
+
+	sliceArray(array) {
+		let newArray = []
+		if(array.length > 7) {
+			for(let i=6; i >= 0; i--){
+				newArray.push(array[array.length-1-i])
+				//console.log("array index:" +array[i])
+			
+			}
+			return newArray
+		}
+		else
+			return array	
 		
-	  
-		const _handleComplete = () => {
-			if (this.state.complete != 0) {
-				
-				getValue().then(
-					(currentStore) => {
-						if (typeof currentStore == "number") {
-							this.setState({
-								complete: complete + 1
-							  })
-							save(sucessfulSessions, this.state.complete)
-						}
-					});
-			}		
-		};
-	  
-		async function save(key, value) {
-		  let stringValue = JSON.stringify(value)
-		  await SecureStore.setItemAsync(key, stringValue);
-		  //console.log("_handleComplete saved to Storage: " + stringValue )
+	}
+
+		// Secure Storage 
+		async saveDate(key, value) {
+			let stringValue = JSON.stringify(value)
+			await SecureStore.setItemAsync(key, stringValue);
+			console.log("_handleComplete saved to Storage: " + stringValue )
 		}
-	  
-		async function getValue() {
-		  let value = await SecureStore.getItemAsync(sucessfulSessions);
-		  //console.log("Retreived Values: " + values )
-		  return JSON.parse(values);
-	  
+		  
+		async getValueDate() {
+			let value = await SecureStore.getItemAsync(keyForDate);
+			console.log("Retreived Values: " + value )
+			return JSON.parse(value);
 		}
-	  
+
+	_handleAppStateChange = nextAppState => {
+		//3 state: background, inactive, active
+		//inactive is ios specific state (when multiple screen between page)
+		if(nextAppState !== "active"){
+			console.log("Background / inactive")
+      		let obj = new Date()
+			let date = obj.getMonth()+"."+obj.getDate()
+			
+      		this.getValueDate().then((dateArray) => {
+				//console.log("length of array:" + dateArray.length)
+        		if (!Array.isArray(dateArray)) {
+          			dateArray = [date]
+          			this.saveDate(keyForDate, dateArray)
+
+        		} else {
+          			dateArray.push(date)
+					  //console.log("length of array after insert:" + dateArray.length)
+					
+					this.setState({
+						test: dateArray
+					})
+
+					dateArray = this.sliceArray(dateArray)
+
+					this.setState({
+						date: dateArray
+					})
+
+					this.saveDate(keyForDate, dateArray)
+          			
+        		}
+			})
+			
+		}
+		else {
+		  console.log("Foreground!");
+		}
+		this.setState({ appState: nextAppState });
 	  };
+	  
 	
 
 	render() {
