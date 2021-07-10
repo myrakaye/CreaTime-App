@@ -45,10 +45,6 @@ export default class Mainpage extends React.Component {
 		}
 	}
 
-
-	
-
-
 	handle0(num) {
 		if(num < 10)
 			return String(0) + String(num)
