@@ -22,6 +22,8 @@ import { useRef } from "react"
 const keyForDate = 'Date'
 const keyForTime = 'Time'
 const keyForLength = 'Length'
+const keyForComplete = 'Complete'
+const keyForExit = 'Exit'
 //const expKey = 'experiment6'
 
 export default class Mainpage extends React.Component {
@@ -42,6 +44,7 @@ export default class Mainpage extends React.Component {
 			date: [],
 			time: [],
 			lengthList: [],
+			exit: 0,
 		}
 	}
 
@@ -93,7 +96,21 @@ export default class Mainpage extends React.Component {
 			this.setState({
 				complete: this.state.complete+1
 			})
+			console.log("state: "+this.state.complete)
 
+			this.getValueComplete().then((complete) => {
+				console.log("complete: "+complete)
+				if(complete === null){
+					this.saveDate(keyForComplete, 1)
+					
+				}
+				else {
+        			this.saveDate(keyForComplete, complete+1)
+				}
+			})
+		}
+
+		if(h == 0 & m == 0 & s == 1) {
 			let obj = new Date()
 			let time = this.handle0(obj.getHours()) + ":" + this.handle0(obj.getMinutes())
 			let date = obj.getMonth()+"."+obj.getDate()
@@ -243,11 +260,35 @@ export default class Mainpage extends React.Component {
 			console.log("Retreived Values: " + value )
 			return JSON.parse(value);
 		}
+		async getValueComplete() {
+			let value = await SecureStore.getItemAsync(keyForComplete);
+			console.log("Retreived Values: " + value )
+			return JSON.parse(value);
+		}
+		async getValueExit() {
+			let value = await SecureStore.getItemAsync(keyForExit);
+			console.log("Retreived Values: " + value )
+			return JSON.parse(value);
+		}
 
 	_handleAppStateChange = nextAppState => {
 		//3 state: background, inactive, active
 		//inactive is ios specific state (when multiple screen between page)
 		if(nextAppState !== "active"){
+			if(this.state.hour!=0 || this.state.minute!=0 || this.state.second!=0){
+				this.getValueExit().then((exit) => {
+					console.log("exit: "+exit)
+					if(exit === null){
+						this.saveDate(keyForExit, 1)
+						console.log("hello world")
+					}
+					else {
+						this.saveDate(keyForExit, exit+1)
+					}
+				})
+			}
+
+
 			console.log("Background / inactive")
       		let obj = new Date()
 			let date = obj.getMonth()+"."+obj.getDate()

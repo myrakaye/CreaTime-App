@@ -18,6 +18,8 @@ import * as SecureStore from 'expo-secure-store';
 const keyForDate = 'Date'
 const keyForTime = 'Time'
 const keyForLength = 'Length'
+const keyForComplete = 'Complete'
+const keyForExit = 'Exit'
 
 export default class Design00 extends React.Component {
 
@@ -41,7 +43,7 @@ export default class Design00 extends React.Component {
 			//used for calculating progress circle
 			total: this.props.route.params.total,
 			//the number of times users complete the time counting down
-			complete: this.props.route.params.complete,
+			//complete: this.props.route.params.complete,
 			//length of time user focus on the screen before clear or exit
 			length: this.props.route.params.complete,
 			test: "test",
@@ -49,6 +51,10 @@ export default class Design00 extends React.Component {
 			time: [],
 			//the length is stored in seconds!!
 			lengthList: [],
+			//update number of times of complete from secure storage (previous sum of complete times)
+			complete: 0,
+			//update number of times of exit the app (only count when the time is not 0)
+			exit: 0,
 		}
 	}
 
@@ -64,6 +70,16 @@ export default class Design00 extends React.Component {
 	}
 	async getValueLength() {
 		let value = await SecureStore.getItemAsync(keyForLength);
+		console.log("Retreived Values: " + value )
+		return JSON.parse(value);
+	}
+	async getValueComplete() {
+		let value = await SecureStore.getItemAsync(keyForComplete);
+		console.log("Retreived Values: " + value )
+		return JSON.parse(value);
+	}
+	async getValueExit() {
+		let value = await SecureStore.getItemAsync(keyForExit);
 		console.log("Retreived Values: " + value )
 		return JSON.parse(value);
 	}
@@ -85,6 +101,37 @@ export default class Design00 extends React.Component {
 				length: lengthArray
 			})
 		})
+		this.getValueComplete().then((completeTimes) => {
+			if(completeTimes!=null){
+				this.setState({
+					complete: completeTimes
+				})
+			}
+		})
+		this.getValueExit().then((exitTimes) => {
+			if(exitTimes!=null){
+				this.setState({
+					exit: exitTimes
+				})
+			}
+		})
+	}
+
+	averageLengthMin() {
+		let arr = this.state.lengthList
+
+		if(!Array.isArray(arr)){
+			return 0
+		}
+		else {
+			let sum = 0
+			// for(let i = 0; i < arr.length; i++) {
+			// 	sum += arr[i]
+			// }
+			// // //turn into mins
+			// return sum /7/60
+		}
+		return 0
 	}
 
 	
@@ -104,7 +151,7 @@ export default class Design00 extends React.Component {
 						alignItems: "flex-start",
 					}}>
 					<Text
-						style={styles.titleText}> {this.state.length} </Text>
+						style={styles.titleText}> {"exit:"+this.state.exit} </Text>
 					<View
 						style={{
 							flex: 1,
@@ -127,9 +174,9 @@ export default class Design00 extends React.Component {
 							height: 59,
 						}}>
 						<Text
-							style={styles.averageProductivityText}>AVERAGE PRODUCTIVITY</Text>
+							style={styles.averageProductivityText}>Average Focus Length</Text>
 						<Text
-							style={styles.hPerWeekText}>5H per WEEK</Text>
+							style={styles.hPerWeekText}> {this.averageLengthMin() + "min"} </Text>
 					</View>
 					<View
 						style={{
