@@ -47,6 +47,8 @@ export default class Design00 extends React.Component {
 			test: "test",
 			date: [],
 			time: [],
+			//the length is stored in seconds!!
+			lengthList: [],
 		}
 	}
 
@@ -55,16 +57,32 @@ export default class Design00 extends React.Component {
 		console.log("Retreived Values: " + value )
 		return JSON.parse(value);
 	}
+	async getValueTime() {
+		let value = await SecureStore.getItemAsync(keyForTime);
+		console.log("Retreived Values: " + value )
+		return JSON.parse(value);
+	}
+	async getValueLength() {
+		let value = await SecureStore.getItemAsync(keyForLength);
+		console.log("Retreived Values: " + value )
+		return JSON.parse(value);
+	}
 
 	// Access Secure Storage
 	componentDidMount() {
-		// SecureStore.getItemAsync('timesComplete').then( storedValue => {
-		// 	if(JSON.stringify(storedValue)!=null)
-		// 		this.setState({ test: JSON.stringify(storedValue) });	
-		//   });
 		this.getValueDate().then((dateArray) => {
 			this.setState({
 				date: dateArray
+			})
+		})
+		this.getValueTime().then((timeArray) => {
+			this.setState({
+				time: timeArray
+			})
+		})
+		this.getValueLength().then((lengthArray) => {
+			this.setState({
+				length: lengthArray
 			})
 		})
 	}
@@ -86,7 +104,7 @@ export default class Design00 extends React.Component {
 						alignItems: "flex-start",
 					}}>
 					<Text
-						style={styles.titleText}> {this.state.date} </Text>
+						style={styles.titleText}> {this.state.length} </Text>
 					<View
 						style={{
 							flex: 1,

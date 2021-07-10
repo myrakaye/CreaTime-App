@@ -22,7 +22,7 @@ import { useRef } from "react"
 const keyForDate = 'Date'
 const keyForTime = 'Time'
 const keyForLength = 'Length'
-const expKey = 'experiment6'
+//const expKey = 'experiment6'
 
 export default class Mainpage extends React.Component {
 	constructor(props) {
@@ -41,6 +41,7 @@ export default class Mainpage extends React.Component {
 			test: "nothing",
 			date: [],
 			time: [],
+			lengthList: [],
 		}
 	}
 
@@ -63,12 +64,6 @@ export default class Mainpage extends React.Component {
 		let m = this.state.minute
 		let s = this.state.second
 
-		if(h == 0 & m == 0 & s == 1) {
-			this.setState({
-				complete: this.state.complete+1
-			})
-		}
-
 		if(s == 0) {
 			if(m == 0) {
 				if(h != 0) {
@@ -81,6 +76,7 @@ export default class Mainpage extends React.Component {
 				else {
 					this.setState({
 						total: 0,
+						length: this.state.length-1
 					})
 				}
 			}
@@ -95,6 +91,84 @@ export default class Mainpage extends React.Component {
 			this.setState({
 				second: s - 1
 			}) 
+		}
+
+		if(h == 0 & m == 0 & s == 1) {
+			this.setState({
+				complete: this.state.complete+1
+			})
+
+			let obj = new Date()
+			let time = this.handle0(obj.getHours()) + ":" + this.handle0(obj.getMinutes())
+			let date = obj.getMonth()+"."+obj.getDate()
+
+			let length = this.state.length
+
+			this.getValueDate().then((dateArray) => {
+				//console.log("length of array:" + dateArray.length)
+        		if (!Array.isArray(dateArray)) {
+          			dateArray = [date]
+          			this.saveDate(keyForDate, dateArray)
+
+        		} else {
+					//no need to check 0 time since it's must the case
+          			dateArray.push(date)
+					  //console.log("length of array after insert:" + dateArray.length)
+
+					dateArray = this.sliceArray(dateArray)
+
+					this.setState({
+						date: dateArray
+					})
+					this.saveDate(keyForDate, dateArray)
+          			
+        		}
+			})
+
+			this.getValueTime().then((timeArray) => {
+				//console.log("length of array:" + timeArray.length)
+        		if (!Array.isArray(timeArray)) {
+          			timeArray = [time]
+          			this.saveTime(keyForTime, timeArray)
+
+        		} else {
+          			timeArray.push(time)
+					  //console.log("length of array after insert:" + timeArray.length)
+
+					timeArray = this.sliceArray(timeArray)
+
+					this.setState({
+						time: timeArray
+					})
+					this.saveTime(keyForTime, timeArray)
+          			
+        		}
+			})
+
+			this.getValueLength().then((lengthArray) => {
+				//console.log("length of array:" + lengthArray.length)
+        		if (!Array.isArray(lengthArray)) {
+          			lengthArray = [length]
+          			this.saveLength(keyForLength, lengthArray)
+
+        		} else {
+					//if(this.state.hour!=0 || this.state.minute!=0 || this.state.second!=0){
+          				lengthArray.push(length)
+					//}
+					  //console.log("length of array after insert:" + lengthArray.length)
+
+					lengthArray = this.sliceArray(lengthArray)
+
+					this.setState({
+						lengthList: lengthArray,
+						length: 0
+					})
+					this.saveLength(keyForLength, lengthArray)
+          			
+        		}
+			})
+
+
 		}
 	}
 
@@ -145,11 +219,31 @@ export default class Mainpage extends React.Component {
 		async saveDate(key, value) {
 			let stringValue = JSON.stringify(value)
 			await SecureStore.setItemAsync(key, stringValue);
-			console.log("_handleComplete saved to Storage: " + stringValue )
+			console.log("Date saved to Storage: " + stringValue )
+		}
+		async saveTime(key, value) {
+			let stringValue = JSON.stringify(value)
+			await SecureStore.setItemAsync(key, stringValue);
+			console.log("Time saved to Storage: " + stringValue )
+		}
+		async saveLength(key, value) {
+			let stringValue = JSON.stringify(value)
+			await SecureStore.setItemAsync(key, stringValue);
+			console.log("Length saved to Storage: " + stringValue )
 		}
 		  
 		async getValueDate() {
 			let value = await SecureStore.getItemAsync(keyForDate);
+			console.log("Retreived Values: " + value )
+			return JSON.parse(value);
+		}
+		async getValueTime() {
+			let value = await SecureStore.getItemAsync(keyForTime);
+			console.log("Retreived Values: " + value )
+			return JSON.parse(value);
+		}
+		async getValueLength() {
+			let value = await SecureStore.getItemAsync(keyForLength);
 			console.log("Retreived Values: " + value )
 			return JSON.parse(value);
 		}
@@ -169,20 +263,69 @@ export default class Mainpage extends React.Component {
           			this.saveDate(keyForDate, dateArray)
 
         		} else {
-          			dateArray.push(date)
+					if(this.state.hour!=0 || this.state.minute!=0 || this.state.second!=0){
+          				dateArray.push(date)
+					}
 					  //console.log("length of array after insert:" + dateArray.length)
-					
-					this.setState({
-						test: dateArray
-					})
 
 					dateArray = this.sliceArray(dateArray)
 
 					this.setState({
 						date: dateArray
 					})
-
 					this.saveDate(keyForDate, dateArray)
+          			
+        		}
+			})
+
+			console.log("hello")
+
+			let time = this.handle0(obj.getHours()) + ":" + this.handle0(obj.getMinutes())
+
+			this.getValueTime().then((timeArray) => {
+				//console.log("length of array:" + timeArray.length)
+        		if (!Array.isArray(timeArray)) {
+          			timeArray = [time]
+          			this.saveTime(keyForTime, timeArray)
+
+        		} else {
+					if(this.state.hour!=0 || this.state.minute!=0 || this.state.second!=0){
+						timeArray.push(time)
+				  	}		
+					  //console.log("length of array after insert:" + timeArray.length)
+
+					timeArray = this.sliceArray(timeArray)
+
+					this.setState({
+						time: timeArray
+					})
+					this.saveTime(keyForTime, timeArray)
+          			
+        		}
+			})
+
+			let length = this.state.length
+
+			this.getValueLength().then((lengthArray) => {
+				//console.log("length of array:" + lengthArray.length)
+        		if (!Array.isArray(lengthArray)) {
+          			lengthArray = [length]
+          			this.saveLength(keyForLength, lengthArray)
+
+        		} else {
+					//when users exit without setting time, will not be counted in statistics
+					if(this.state.hour!=0 || this.state.minute!=0 || this.state.second!=0){
+          				lengthArray.push(length)
+					}
+					  //console.log("length of array after insert:" + lengthArray.length)
+
+					lengthArray = this.sliceArray(lengthArray)
+
+					this.setState({
+						lengthList: lengthArray,
+						length: 0
+					})
+					this.saveLength(keyForLength, lengthArray)
           			
         		}
 			})
