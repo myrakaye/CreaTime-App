@@ -346,7 +346,8 @@ export default class Design00 extends React.Component {
 									}}
 									locations={[0, 1]}
 									colors={["rgb(98, 54, 255)", "rgb(184, 148, 242)"]}
-									style={styles.rectangleTwoViewLinearGradient} height = {this.calculateHeight(0)}>
+									style={styles.rectangleTwoViewLinearGradient} 
+									>
 									<View
 										style={styles.rectangleTwoView}/>
 								</LinearGradient>
