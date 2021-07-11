@@ -153,6 +153,39 @@ export default class Design00 extends React.Component {
 		}
 	}
 
+	calculateDate(i) {
+		let d = this.state.date
+		let t = this.state.time
+		if(!Array.isArray(d) || !Array.isArray(t)) {
+			return ""
+		}
+
+		else{
+			if(i >= d.length) {
+				return ""
+			}
+			else {
+				console.log("d:" + d[i] + " t: " + t[i])
+				return d[i] + " " + t[i]
+			}
+		}
+	}
+
+	calculateHeight(i) {
+		let h = this.state.lengthList
+		if(!Array.isArray(h)) {
+			return 0
+		}	
+		else{
+			if(i >= d.length) {
+				return 0
+			}
+			else {
+				console.log("h:" + h[i])
+				return h[i]
+			}
+		}
+	}
 	
 
 	calculateConcentration() {
@@ -162,6 +195,7 @@ export default class Design00 extends React.Component {
 
 		newConcentration -= (this.state.exit/10)
 		newConcentration += (this.state.complete/(10*3))
+		
 		
 		if (newConcentration < 0){newConcentration = 0;}
 		if (newConcentration > 1){newConcentration = 1}
@@ -174,6 +208,8 @@ export default class Design00 extends React.Component {
 
 		return (Math.round(newConcentration * 10) / 10)
 	}
+
+	
 	
 
 	render() {
@@ -225,7 +261,7 @@ export default class Design00 extends React.Component {
 					<View
 						style={styles.componentsButtonCoffePlaceView}>
 						<Text
-							style={styles.coffePlaceText}>Recents</Text>
+							style={styles.coffePlaceText}>Recent 7</Text>
 						<Image
 							source={require("./../../assets/images/ic-drop-normal.png")}
 							style={styles.icDropNormalImage}/>
@@ -320,7 +356,7 @@ export default class Design00 extends React.Component {
 										flex: 1,
 									}}/>
 								<Text
-									style={styles.monText}> 7.10 </Text>
+									style={styles.monText}> {this.calculateDate(0)} </Text>
 							</View>
 							<View
 								style={styles.group9Copy7View}>
@@ -344,7 +380,7 @@ export default class Design00 extends React.Component {
 										flex: 1,
 									}}/>
 								<Text
-									style={styles.tueText}>{this.barGraphView()}</Text>
+									style={styles.tueText}> {this.calculateDate(1)} </Text>
 							</View>
 							<View
 								style={styles.group9Copy8View}>
@@ -368,7 +404,7 @@ export default class Design00 extends React.Component {
 										flex: 1,
 									}}/>
 								<Text
-									style={styles.wedText}> 7.12 </Text>
+									style={styles.wedText}> {this.calculateDate(2)} </Text>
 							</View>
 							<View
 								style={{
@@ -396,7 +432,7 @@ export default class Design00 extends React.Component {
 										flex: 1,
 									}}/>
 								<Text
-									style={styles.thuText}> 7.13 </Text>
+									style={styles.thuText}> {this.calculateDate(3)} </Text>
 							</View>
 							<View
 								style={styles.group9Copy10View}>
@@ -420,7 +456,7 @@ export default class Design00 extends React.Component {
 										flex: 1,
 									}}/>
 								<Text
-									style={styles.friText}> 7.14 </Text>
+									style={styles.friText}> {this.calculateDate(4)} </Text>
 							</View>
 							<View
 								style={styles.group9Copy11View}>
@@ -444,7 +480,7 @@ export default class Design00 extends React.Component {
 										flex: 1,
 									}}/>
 								<Text
-									style={styles.satText}>7.15</Text>
+									style={styles.satText}> {this.calculateDate(5)} </Text>
 							</View>
 							<View
 								style={styles.group9Copy12View}>
@@ -468,7 +504,7 @@ export default class Design00 extends React.Component {
 										flex: 1,
 									}}/>
 								<Text
-									style={styles.sunText}>7.16</Text>
+									style={styles.sunText}> {this.calculateDate(6)} </Text>
 							</View>
 						</View>
 					</View>
@@ -790,7 +826,7 @@ const styles = StyleSheet.create({
 		opacity: 0.3,
 		color: "black",
 		fontFamily: ".AppleSystemUIFont",
-		fontSize: 11,
+		fontSize: 10,
 		fontStyle: "normal",
 		fontWeight: "normal",
 		textAlign: "center",
@@ -800,7 +836,7 @@ const styles = StyleSheet.create({
 	},
 	group9Copy7View: {
 		backgroundColor: "transparent",
-		width: 27,
+		width: 28,
 		height: 225,
 		marginLeft: 25,
 		marginRight: -8,
@@ -821,7 +857,7 @@ const styles = StyleSheet.create({
 		opacity: 0.3,
 		color: "black",
 		fontFamily: ".AppleSystemUIFont",
-		fontSize: 11,
+		fontSize: 10,
 		fontStyle: "normal",
 		fontWeight: "normal",
 		textAlign: "center",
@@ -851,7 +887,7 @@ const styles = StyleSheet.create({
 		opacity: 0.3,
 		color: "black",
 		fontFamily: ".AppleSystemUIFont",
-		fontSize: 11,
+		fontSize: 10,
 		fontStyle: "normal",
 		fontWeight: "normal",
 		textAlign: "center",
@@ -880,7 +916,7 @@ const styles = StyleSheet.create({
 		opacity: 0.3,
 		color: "black",
 		fontFamily: ".AppleSystemUIFont",
-		fontSize: 11,
+		fontSize: 10,
 		fontStyle: "normal",
 		fontWeight: "normal",
 		textAlign: "center",
@@ -889,7 +925,7 @@ const styles = StyleSheet.create({
 	},
 	group9Copy10View: {
 		backgroundColor: "transparent",
-		width: 21,
+		width: 25,
 		height: 201,
 		marginRight: 22,
 		marginTop: 46,
@@ -909,7 +945,7 @@ const styles = StyleSheet.create({
 		opacity: 0.3,
 		color: "black",
 		fontFamily: ".AppleSystemUIFont",
-		fontSize: 11,
+		fontSize: 9,
 		fontStyle: "normal",
 		fontWeight: "normal",
 		textAlign: "center",
@@ -918,7 +954,7 @@ const styles = StyleSheet.create({
 	},
 	group9Copy11View: {
 		backgroundColor: "transparent",
-		width: 27,
+		width: 28,
 		height: 201,
 		marginRight: 20,
 		marginTop: 49,
@@ -938,7 +974,7 @@ const styles = StyleSheet.create({
 		opacity: 0.3,
 		color: "black",
 		fontFamily: ".AppleSystemUIFont",
-		fontSize: 11,
+		fontSize: 10,
 		fontStyle: "normal",
 		fontWeight: "normal",
 		textAlign: "center",
@@ -947,7 +983,7 @@ const styles = StyleSheet.create({
 	},
 	group9Copy12View: {
 		backgroundColor: "transparent",
-		width: 28,
+		width: 29,
 		height: 215,
 		marginTop: 34,
 	},
@@ -964,7 +1000,7 @@ const styles = StyleSheet.create({
 	sunText: {
 		color: "black",
 		fontFamily: ".AppleSystemUIFont",
-		fontSize: 11,
+		fontSize: 10,
 		fontStyle: "normal",
 		fontWeight: "normal",
 		textAlign: "center",
