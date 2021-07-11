@@ -101,7 +101,7 @@ export default class Design00 extends React.Component {
 		})
 		this.getValueLength().then((lengthArray) => {
 			this.setState({
-				length: lengthArray
+				lengthList: lengthArray
 			})
 		})
 		this.getValueComplete().then((completeTimes) => {
@@ -127,19 +127,19 @@ export default class Design00 extends React.Component {
 
 	averageLengthMin() {
 		let arr = this.state.lengthList
-
+		console.log("here is list; "+this.state.lengthList)
 		if(!Array.isArray(arr)){
 			return 0
 		}
 		else {
 			let sum = 0
-			// for(let i = 0; i < arr.length; i++) {
-			// 	sum += arr[i]
-			// }
-			// // //turn into mins
-			// return sum /7/60
+			for(let i = 0; i < arr.length; i++) {
+			 	sum += arr[i]
+			 }
+			 console.log("sum: "+sum)
+			 //turn into mins
+			 return (sum /7/60).toPrecision(2)
 		}
-		return 0
 	}
 
 	progressBarView(){
@@ -165,7 +165,7 @@ export default class Design00 extends React.Component {
 				return ""
 			}
 			else {
-				console.log("d:" + d[i] + " t: " + t[i])
+				//console.log("d:" + d[i] + " t: " + t[i])
 				return d[i] + " " + t[i]
 			}
 		}
@@ -177,7 +177,7 @@ export default class Design00 extends React.Component {
 			return 0
 		}	
 		else{
-			if(i >= d.length) {
+			if(i >= h.length) {
 				return 0
 			}
 			else {
@@ -249,7 +249,7 @@ export default class Design00 extends React.Component {
 							height: 59,
 						}}>
 						<Text
-							style={styles.averageProductivityText}>How Distracted Did You Get?</Text>
+							style={styles.averageProductivityText}> Average Focus Length </Text>
 						<Text
 							style={styles.hPerWeekText}> {this.averageLengthMin() + "min"} </Text>
 					</View>
@@ -338,15 +338,15 @@ export default class Design00 extends React.Component {
 								<LinearGradient
 									start={{
 										x: 3.44,
-										y: 3.72,
+										y: -2.17,
 									}}
 									end={{
 										x: 3.44,
-										y: -2.17,
+										y: 3.72,
 									}}
 									locations={[0, 1]}
 									colors={["rgb(98, 54, 255)", "rgb(184, 148, 242)"]}
-									style={styles.rectangleTwoViewLinearGradient}>
+									style={styles.rectangleTwoViewLinearGradient} height = {this.calculateHeight(0)}>
 									<View
 										style={styles.rectangleTwoView}/>
 								</LinearGradient>
@@ -540,11 +540,11 @@ export default class Design00 extends React.Component {
 								<LinearGradient
 									start={{
 										x: 3.44,
-										y: 3.72,
+										y: -2.17,
 									}}
 									end={{
 										x: 3.44,
-										y: -2.17,
+										y: 3.72,
 									}}
 									locations={[0, 1]}
 									colors={["rgb(98, 54, 255)", "rgb(184, 148, 242)"]}
@@ -653,7 +653,7 @@ const styles = StyleSheet.create({
 	hPerWeekText: {
 		backgroundColor: "transparent",
 		color: "black",
-		fontSize: 33,
+		fontSize: 25,
 		fontStyle: "normal",
 		fontWeight: "normal",
 		textAlign: "left",
@@ -723,7 +723,7 @@ const styles = StyleSheet.create({
 		left: 0,
 		right: 0,
 		top: 0,
-		height: 279,
+		height: 79,
 	},
 	group10View: {
 		backgroundColor: "transparent",
@@ -815,7 +815,7 @@ const styles = StyleSheet.create({
 	},
 	rectangleTwoViewLinearGradient: {
 		borderRadius: 7,
-		height: 224,
+		height: 150,
 		marginLeft: 7,
 		marginRight: 6,
 		alignItems: "flex-end",
