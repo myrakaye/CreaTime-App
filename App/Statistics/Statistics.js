@@ -133,11 +133,11 @@ export default class Design00 extends React.Component {
 		}
 		else {
 			let sum = 0
-			// for(let i = 0; i < arr.length; i++) {
-			// 	sum += arr[i]
-			// }
-			// // //turn into mins
-			// return sum /7/60
+			for(let i = 0; i < arr.length; i++) {
+				sum += arr[i]
+			}
+			// //turn into mins
+			return sum /7/60
 		}
 		return 0
 	}
@@ -153,12 +153,6 @@ export default class Design00 extends React.Component {
 		}
 	}
 
-	updateBarGraph() {
-		
-		return [x,y]
-	}
-
-	
 	
 
 	calculateConcentration() {
@@ -167,6 +161,7 @@ export default class Design00 extends React.Component {
 		//console.log("Distraction: "+distractions)
 
 		newConcentration -= (this.state.exit/10)
+		newConcentration += (this.state.complete/(10*3))
 		
 		if (newConcentration < 0){newConcentration = 0;}
 		if (newConcentration > 1){newConcentration = 1}
@@ -177,7 +172,7 @@ export default class Design00 extends React.Component {
 		// 	return{concentration: newConcentration}
 		// })
 
-		return (newConcentration)
+		return (Math.round(newConcentration * 10) / 10)
 	}
 	
 
@@ -230,7 +225,7 @@ export default class Design00 extends React.Component {
 					<View
 						style={styles.componentsButtonCoffePlaceView}>
 						<Text
-							style={styles.coffePlaceText}>Week</Text>
+							style={styles.coffePlaceText}>Recents</Text>
 						<Image
 							source={require("./../../assets/images/ic-drop-normal.png")}
 							style={styles.icDropNormalImage}/>
@@ -325,7 +320,7 @@ export default class Design00 extends React.Component {
 										flex: 1,
 									}}/>
 								<Text
-									style={styles.monText}> {this.updateBarGraph()[0]} </Text>
+									style={styles.monText}> 7.10 </Text>
 							</View>
 							<View
 								style={styles.group9Copy7View}>
@@ -349,7 +344,7 @@ export default class Design00 extends React.Component {
 										flex: 1,
 									}}/>
 								<Text
-									style={styles.tueText}>7.11</Text>
+									style={styles.tueText}>{this.barGraphView()}</Text>
 							</View>
 							<View
 								style={styles.group9Copy8View}>
@@ -830,6 +825,7 @@ const styles = StyleSheet.create({
 		fontStyle: "normal",
 		fontWeight: "normal",
 		textAlign: "center",
+		alignItems: "baseline",
 		lineHeight: 13,
 		marginBottom: 1,
 	},
