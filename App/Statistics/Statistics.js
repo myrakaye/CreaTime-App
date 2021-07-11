@@ -153,6 +153,20 @@ export default class Design00 extends React.Component {
 		}
 	}
 
+	barGraphView(){
+		return{
+			position: "absolute",
+			bottom: 30,
+			borderRadius: 7,
+			//pass in calculateHeight(i) and calculate for screen height, like progressBarView
+			height: 100, 
+			marginLeft: 7,
+			marginRight: 6,
+			marginBottom: 10,
+			alignItems: "flex-end",
+		}
+	}
+
 	calculateDate(i) {
 		let d = this.state.date
 		let t = this.state.time
@@ -278,16 +292,16 @@ export default class Design00 extends React.Component {
 						style={styles.group19View}>
 						<View
 							style={styles.rectangleCopy42View}/>
-						<View
-							style={styles.rectangleView}/>
+						{/* <View
+							style={styles.rectangleView}/> */}
 						<View
 							pointerEvents="box-none"
 							style={{
 								position: "absolute",
-								left: 20,
+								left: 15,
 								right: 18,
 								top: 16,
-								height: 247,
+								height: 300,
 								flexDirection: "row",
 								alignItems: "flex-start",
 							}}>
@@ -298,7 +312,7 @@ export default class Design00 extends React.Component {
 									style={{
 										position: "absolute",
 										left: 0,
-										right: -1,
+										right: 0,
 										top: 0,
 										bottom: 0,
 									}}>
@@ -308,18 +322,20 @@ export default class Design00 extends React.Component {
 										style={styles.textTwoText}>6</Text>
 									<Text
 										style={styles.textThreeText}>5</Text>
+										<Text
+										style={styles.textFourText}>4</Text>
 									<Text
 										style={styles.textFiveText}>3</Text>
-									<View
+									{/* <View
 										style={{
 											flex: 1,
-										}}/>
+										}}/> */}
 									<Text
 										style={styles.textSixText}>2</Text>
 									<Text
 										style={styles.textSevenText}>1</Text>
 								</View>
-								<View
+								{/* <View
 									pointerEvents="box-none"
 									style={{
 										position: "absolute",
@@ -331,7 +347,7 @@ export default class Design00 extends React.Component {
 									}}>
 									<Text
 										style={styles.textFourText}>4</Text>
-								</View>
+								</View> */}
 							</View>
 							<View
 								style={styles.group9View}>
@@ -346,10 +362,13 @@ export default class Design00 extends React.Component {
 									}}
 									locations={[0, 1]}
 									colors={["rgb(98, 54, 255)", "rgb(184, 148, 242)"]}
-									style={styles.rectangleTwoViewLinearGradient} 
-									>
+									style={this.barGraphView()}>
+										
 									<View
 										style={styles.rectangleTwoView}/>
+								
+								<Text
+									style={styles.monText}> {this.calculateDate(0)} </Text>
 								</LinearGradient>
 								<View
 									style={{
@@ -357,6 +376,138 @@ export default class Design00 extends React.Component {
 									}}/>
 								<Text
 									style={styles.monText}> {this.calculateDate(0)} </Text>
+								
+							</View>
+							<View
+								style={styles.group9Copy1View}>
+								<LinearGradient
+									start={{
+										x: 3.44,
+										y: 3.72,
+									}}
+									end={{
+										x: 3.44,
+										y: -2.17,
+									}}
+									locations={[0, 1]}
+									colors={["rgb(98, 54, 255)", "rgb(184, 148, 242)"]}
+									style={this.barGraphView()}>
+									<View
+										style={styles.rectangleThreeView}/>
+									<Text
+									style={styles.tueText}> {this.calculateDate(2)} </Text>
+								</LinearGradient>
+								<View
+									style={{
+										flex: 1,
+									}}/>
+								<Text
+									style={styles.tueText}> {this.calculateDate(2)} </Text>
+							</View>
+							<View
+								style={styles.group9Copy2View}>
+								<LinearGradient
+									start={{
+										x: 3.44,
+										y: 3.72,
+									}}
+									end={{
+										x: 3.44,
+										y: -2.17,
+									}}
+									locations={[0, 1]}
+									colors={["rgb(98, 54, 255)", "rgb(184, 148, 242)"]}
+									style={this.barGraphView()}>
+									<View
+										style={styles.rectangleFourView}/>
+										<Text
+									style={styles.wedText}> {this.calculateDate(3)} </Text>
+								</LinearGradient>
+								<View
+									style={{
+										flex: 1,
+									}}/>
+								<Text
+									style={styles.wedText}> {this.calculateDate(3)} </Text>
+							</View>
+							
+							<View
+								style={styles.group9Copy3View}>
+								<LinearGradient
+									start={{
+										x: 3.44,
+										y: 3.72,
+									}}
+									end={{
+										x: 3.44,
+										y: -2.17,
+									}}
+									locations={[0, 1]}
+									colors={["rgb(98, 54, 255)", "rgb(184, 148, 242)"]}
+									style={this.barGraphView()}>
+									<View
+										style={styles.rectangleFiveView}/>
+										<Text
+									style={styles.thuText}> {this.calculateDate(4)} </Text>
+								</LinearGradient>
+								<View
+									style={{
+										flex: 1,
+									}}/>
+								<Text
+									style={styles.thuText}> {this.calculateDate(4)} </Text>
+							</View>
+							<View
+								style={styles.group9Copy5View}>
+								<LinearGradient
+									start={{
+										x: 3.44,
+										y: 3.72,
+									}}
+									end={{
+										x: 3.44,
+										y: -2.17,
+									}}
+									locations={[0, 1]}
+									colors={["rgb(98, 54, 255)", "rgb(184, 148, 242)"]}
+									style={this.barGraphView()}>
+									<View
+										style={styles.rectangleSixView}/>
+										<Text
+									style={styles.friText}> {this.calculateDate(5)} </Text>
+								</LinearGradient>
+								<View
+									style={{
+										flex: 1,
+									}}/>
+								<Text
+									style={styles.friText}> {this.calculateDate(5)} </Text>
+							</View>
+							<View
+								style={styles.group9Copy6View}>
+								<LinearGradient
+									start={{
+										x: 3.44,
+										y: 3.72,
+									}}
+									end={{
+										x: 3.44,
+										y: -2.17,
+									}}
+									locations={[0, 1]}
+									colors={["rgb(98, 54, 255)", "rgb(184, 148, 242)"]}
+									style={this.barGraphView()}>
+									<View
+										style={styles.rectangleSevenView}/>
+										<Text
+									style={styles.satText}> {this.calculateDate(6)} </Text>
+								</LinearGradient>
+								<View
+									style={{
+										flex: 1,
+									}}/>
+								<Text
+									style={styles.satText}> {this.calculateDate(6)} </Text>
 							</View>
 							<View
 								style={styles.group9Copy7View}>
@@ -371,133 +522,11 @@ export default class Design00 extends React.Component {
 									}}
 									locations={[0, 1]}
 									colors={["rgb(98, 54, 255)", "rgb(184, 148, 242)"]}
-									style={styles.rectangleThreeViewLinearGradient}>
-									<View
-										style={styles.rectangleThreeView}/>
-								</LinearGradient>
-								<View
-									style={{
-										flex: 1,
-									}}/>
-								<Text
-									style={styles.tueText}> {this.calculateDate(1)} </Text>
-							</View>
-							<View
-								style={styles.group9Copy8View}>
-								<LinearGradient
-									start={{
-										x: 3.44,
-										y: 3.72,
-									}}
-									end={{
-										x: 3.44,
-										y: -2.17,
-									}}
-									locations={[0, 1]}
-									colors={["rgb(98, 54, 255)", "rgb(184, 148, 242)"]}
-									style={styles.rectangleFourViewLinearGradient}>
-									<View
-										style={styles.rectangleFourView}/>
-								</LinearGradient>
-								<View
-									style={{
-										flex: 1,
-									}}/>
-								<Text
-									style={styles.wedText}> {this.calculateDate(2)} </Text>
-							</View>
-							<View
-								style={{
-									flex: 1,
-								}}/>
-							<View
-								style={styles.group9Copy9View}>
-								<LinearGradient
-									start={{
-										x: 3.44,
-										y: 3.72,
-									}}
-									end={{
-										x: 3.44,
-										y: -2.17,
-									}}
-									locations={[0, 1]}
-									colors={["rgb(98, 54, 255)", "rgb(184, 148, 242)"]}
-									style={styles.rectangleFiveViewLinearGradient}>
-									<View
-										style={styles.rectangleFiveView}/>
-								</LinearGradient>
-								<View
-									style={{
-										flex: 1,
-									}}/>
-								<Text
-									style={styles.thuText}> {this.calculateDate(3)} </Text>
-							</View>
-							<View
-								style={styles.group9Copy10View}>
-								<LinearGradient
-									start={{
-										x: 3.44,
-										y: 3.72,
-									}}
-									end={{
-										x: 3.44,
-										y: -2.17,
-									}}
-									locations={[0, 1]}
-									colors={["rgb(98, 54, 255)", "rgb(184, 148, 242)"]}
-									style={styles.rectangleSixViewLinearGradient}>
-									<View
-										style={styles.rectangleSixView}/>
-								</LinearGradient>
-								<View
-									style={{
-										flex: 1,
-									}}/>
-								<Text
-									style={styles.friText}> {this.calculateDate(4)} </Text>
-							</View>
-							<View
-								style={styles.group9Copy11View}>
-								<LinearGradient
-									start={{
-										x: 3.44,
-										y: 3.72,
-									}}
-									end={{
-										x: 3.44,
-										y: -2.17,
-									}}
-									locations={[0, 1]}
-									colors={["rgb(98, 54, 255)", "rgb(184, 148, 242)"]}
-									style={styles.rectangleSevenViewLinearGradient}>
-									<View
-										style={styles.rectangleSevenView}/>
-								</LinearGradient>
-								<View
-									style={{
-										flex: 1,
-									}}/>
-								<Text
-									style={styles.satText}> {this.calculateDate(5)} </Text>
-							</View>
-							<View
-								style={styles.group9Copy12View}>
-								<LinearGradient
-									start={{
-										x: 3.44,
-										y: 3.72,
-									}}
-									end={{
-										x: 3.44,
-										y: -2.17,
-									}}
-									locations={[0, 1]}
-									colors={["rgb(98, 54, 255)", "rgb(184, 148, 242)"]}
-									style={styles.rectangleEightViewLinearGradient}>
+									style={this.barGraphView()}>
 									<View
 										style={styles.rectangleEightView}/>
+										<Text
+									style={styles.sunText}> {this.calculateDate(6)} </Text>
 								</LinearGradient>
 								<View
 									style={{
@@ -697,22 +726,22 @@ const styles = StyleSheet.create({
 	group19View: {
 		backgroundColor: "transparent",
 		position: "absolute",
-		left: 0,
+		left: -5,
 		right: 0,
 		top: 0,
-		height: 287,
+		height: 280,
 	},
 	rectangleCopy42View: {
 		backgroundColor: "white",
 		borderRadius: 22.27,
-		borderWidth: 1,
+		borderWidth: 2,
 		borderColor: "rgba(228, 228, 228, 0.5)",
 		borderStyle: "solid",
 		position: "absolute",
-		left: 20,
+		left: 25,
 		right: 16,
-		top: 41,
-		height: 246,
+		top: 20,
+		height: 280,
 	},
 	rectangleView: {
 		backgroundColor: "white",
@@ -803,24 +832,20 @@ const styles = StyleSheet.create({
 		backgroundColor: "transparent",
 	},
 	group9View: {
+		position: "relative",
 		backgroundColor: "transparent",
 		alignSelf: "center",
 		width: 32,
-		height: 251,
+		height: 330,
 		marginLeft: 20,
-		marginRight: -12,
+		marginRight: 8,
+		
 	},
 	rectangleTwoView: {
 		width: "100%",
 		height: "100%",
 	},
-	rectangleTwoViewLinearGradient: {
-		borderRadius: 7,
-		height: 150,
-		marginLeft: 7,
-		marginRight: 6,
-		alignItems: "flex-end",
-	},
+	
 	monText: {
 		backgroundColor: "transparent",
 		opacity: 0.3,
@@ -830,17 +855,30 @@ const styles = StyleSheet.create({
 		fontStyle: "normal",
 		fontWeight: "normal",
 		textAlign: "center",
-		alignItems: "baseline",
+		//alignItems: "baseline",
 		lineHeight: 15,
 		marginBottom: 1,
+		// position: "absolute",
+		// bottom: 0
 	},
-	group9Copy7View: {
+	rectangleTwoViewLinearGradient: {
+		position: "absolute",
+		bottom: 30,
+		borderRadius: 7,
+		height: 100,
+		marginLeft: 7,
+		marginRight: 6,
+		marginBottom: 10,
+		alignItems: "flex-end",
+	},
+	group9Copy1View: {
+		position: "relative",
 		backgroundColor: "transparent",
-		width: 30,
-		height: 225,
-		marginLeft: 25,
-		marginRight: -12,
-		marginTop: 24,
+		alignSelf: "center",
+		width: 32,
+		height: 330,
+		marginLeft: 5,
+		marginRight: 10,
 	},
 	rectangleThreeViewLinearGradient: {
 		borderRadius: 7,
@@ -864,12 +902,14 @@ const styles = StyleSheet.create({
 		lineHeight: 15,
 		marginBottom: 1,
 	},
-	group9Copy8View: {
+	group9Copy2View: {
+		position: "relative",
 		backgroundColor: "transparent",
+		alignSelf: "center",
 		width: 32,
-		height: 203,
-		marginLeft: 26,
-		marginTop: 46,
+		height: 330,
+		marginLeft: 5,
+		marginRight: 10,
 	},
 	rectangleFourView: {
 		width: "100%",
@@ -893,12 +933,14 @@ const styles = StyleSheet.create({
 		lineHeight: 15,
 		marginBottom: 1,
 	},
-	group9Copy9View: {
+	group9Copy3View: {
+		position: "relative",
 		backgroundColor: "transparent",
+		alignSelf: "center",
 		width: 32,
-		height: 209,
-		marginRight: 18,
-		marginTop: 40,
+		height: 330,
+		marginLeft: 5,
+		marginRight: 10,
 	},
 	rectangleFiveViewLinearGradient: {
 		borderRadius: 7,
@@ -922,12 +964,14 @@ const styles = StyleSheet.create({
 		lineHeight: 15,
 		marginBottom: 1,
 	},
-	group9Copy10View: {
+	group9Copy5View: {
+		position: "relative",
 		backgroundColor: "transparent",
-		width: 25,
-		height: 201,
-		marginRight: 20,
-		marginTop: 46,
+		alignSelf: "center",
+		width: 32,
+		height: 330,
+		marginLeft: 5,
+		marginRight: 10,
 	},
 	rectangleSixView: {
 		width: "100%",
@@ -951,12 +995,14 @@ const styles = StyleSheet.create({
 		lineHeight: 15,
 		marginBottom: 1,
 	},
-	group9Copy11View: {
+	group9Copy6View: {
+		position: "relative",
 		backgroundColor: "transparent",
-		width: 30,
-		height: 201,
-		marginRight: 15,
-		marginTop: 49,
+		alignSelf: "center",
+		width: 32,
+		height: 330,
+		marginLeft: 5,
+		marginRight: 10,
 	},
 	rectangleSevenViewLinearGradient: {
 		borderRadius: 7,
@@ -980,11 +1026,14 @@ const styles = StyleSheet.create({
 		lineHeight: 15,
 		marginBottom: 1,
 	},
-	group9Copy12View: {
+	group9Copy7View: {
+		position: "relative",
 		backgroundColor: "transparent",
-		width: 31,
-		height: 215,
-		marginTop: 34,
+		alignSelf: "center",
+		width: 32,
+		height: 330,
+		marginLeft: 5,
+		marginRight: 5,
 	},
 	rectangleEightView: {
 		width: "100%",
