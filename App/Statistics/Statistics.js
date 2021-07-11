@@ -55,6 +55,9 @@ export default class Design00 extends React.Component {
 			complete: 0,
 			//update number of times of exit the app (only count when the time is not 0)
 			exit: 0,
+
+			concentration: 1,
+			
 		}
 	}
 
@@ -112,9 +115,14 @@ export default class Design00 extends React.Component {
 			if(exitTimes!=null){
 				this.setState({
 					exit: exitTimes
+					
 				})
 			}
+			
+		
 		})
+
+		
 	}
 
 	averageLengthMin() {
@@ -134,10 +142,47 @@ export default class Design00 extends React.Component {
 		return 0
 	}
 
+	progressBarView(){
+		return {
+			backgroundColor: "transparent",
+			width: 300*this.calculateConcentration(),
+			marginLeft: 0,
+			marginRight: -8,
+			marginTop: 12,
+				
+		}
+	}
+
+	updateBarGraph() {
+		
+		return [x,y]
+	}
+
+	
+	
+
+	calculateConcentration() {
+		var newConcentration = 1
+		//let distractions = () => this.getValueExit()
+		//console.log("Distraction: "+distractions)
+
+		newConcentration -= (this.state.exit/10)
+		
+		if (newConcentration < 0){newConcentration = 0;}
+		if (newConcentration > 1){newConcentration = 1}
+		
+		//newConcentration = (newConcentration + this.state.concentration) / 2
+
+		// this.setState((state) => {
+		// 	return{concentration: newConcentration}
+		// })
+
+		return (newConcentration)
+	}
 	
 
 	render() {
-	
+
 		return <View
 				style={styles.design00View}>
 				<View
@@ -151,7 +196,7 @@ export default class Design00 extends React.Component {
 						alignItems: "flex-start",
 					}}>
 					<Text
-						style={styles.titleText}> {"exit:"+this.state.exit} </Text>
+						style={styles.titleText}> {"Statistics"} </Text>
 					<View
 						style={{
 							flex: 1,
@@ -174,7 +219,7 @@ export default class Design00 extends React.Component {
 							height: 59,
 						}}>
 						<Text
-							style={styles.averageProductivityText}>Average Focus Length</Text>
+							style={styles.averageProductivityText}>How Distracted Did You Get?</Text>
 						<Text
 							style={styles.hPerWeekText}> {this.averageLengthMin() + "min"} </Text>
 					</View>
@@ -228,7 +273,7 @@ export default class Design00 extends React.Component {
 										bottom: 0,
 									}}>
 									<Text
-										style={styles.textText}>7</Text>
+										style={styles.textText}>{}</Text>
 									<Text
 										style={styles.textTwoText}>6</Text>
 									<Text
@@ -280,7 +325,7 @@ export default class Design00 extends React.Component {
 										flex: 1,
 									}}/>
 								<Text
-									style={styles.monText}> 7.10 </Text>
+									style={styles.monText}> {this.updateBarGraph()[0]} </Text>
 							</View>
 							<View
 								style={styles.group9Copy7View}>
@@ -452,13 +497,34 @@ export default class Design00 extends React.Component {
 								alignItems: "flex-start",
 							}}>
 							<Text
-								style={styles.textEightText}>80%</Text>
+								style={styles.textEightText}>{this.calculateConcentration()*100}%</Text>
 							<Text
 								style={styles.highText}>High</Text>
 						</View>
-						<Image
+						{/* <Image
 							source={require("./../../assets/images/group-13.png")}
-							style={styles.group13Image}/>
+							style={styles.group13Image}/> */}
+							
+						<View
+								style={this.progressBarView()}>
+								<LinearGradient
+									start={{
+										x: 3.44,
+										y: 3.72,
+									}}
+									end={{
+										x: 3.44,
+										y: -2.17,
+									}}
+									locations={[0, 1]}
+									colors={["rgb(98, 54, 255)", "rgb(184, 148, 242)"]}
+									style={styles.progressBarViewLinearGradient}>
+									<View
+										style={this.progressBarView()}/>
+								</LinearGradient>
+								
+							</View>
+
 						<View
 							style={{
 								flex: 1,
@@ -473,9 +539,9 @@ export default class Design00 extends React.Component {
 								alignItems: "flex-end",
 							}}>
 							<Text
-								style={styles.textNineText}>100</Text>
+								style={styles.textNineText}>0</Text>
 							<Text
-								style={styles.textTenText}>80</Text>
+								style={styles.textTenText}>20</Text>
 							<Text
 								style={styles.textElevenText}>50</Text>
 							<View
@@ -483,9 +549,9 @@ export default class Design00 extends React.Component {
 									flex: 1,
 								}}/>
 							<Text
-								style={styles.textTwelveText}>20</Text>
+								style={styles.textTwelveText}>80</Text>
 							<Text
-								style={styles.textThirteenText}>0</Text>
+								style={styles.textThirteenText}>100</Text>
 						</View>
 					</View>
 				</View>
@@ -968,15 +1034,29 @@ const styles = StyleSheet.create({
 		marginLeft: 7,
 		marginTop: 9,
 	},
-	group13Image: {
-		backgroundColor: "transparent",
-		resizeMode: "cover",
-		alignSelf: "stretch",
-		width: null,
-		height: 14,
-		marginLeft: 4,
-		marginTop: 6,
+	// group13Image: {
+	// 	backgroundColor: "transparent",
+	// 	resizeMode: "cover",
+	// 	alignSelf: "stretch",
+	// 	width: null,
+	// 	height: 14,
+	// 	marginLeft: 4,
+	// 	marginTop: 6,
+	// },
+	progressBarViewLinearGradient: {
+		borderRadius: 7,
+		height: 15,
+		alignItems: "flex-end",
 	},
+	// progressBarView: {
+	// 	backgroundColor: "transparent",
+	// 	width: 360*{this.state.concentration},
+	// 	marginLeft: 0,
+	// 	marginRight: -8,
+	// 	marginTop: 12,
+	// },
+
+	
 	textNineText: {
 		backgroundColor: "transparent",
 		color: "black",
