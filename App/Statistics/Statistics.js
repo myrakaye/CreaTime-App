@@ -136,7 +136,7 @@ export default class Design00 extends React.Component {
 			for(let i = 0; i < arr.length; i++) {
 			 	sum += arr[i]
 			 }
-			 console.log("sum: "+sum)
+			 //console.log("sum: "+sum)
 			 //turn into mins
 			 return (sum /7/60).toPrecision(2)
 		}
@@ -145,25 +145,11 @@ export default class Design00 extends React.Component {
 	progressBarView(){
 		return {
 			backgroundColor: "transparent",
-			width: 300*this.calculateConcentration(),
+			width: 333*this.calculateConcentration(),
 			marginLeft: 0,
 			marginRight: -8,
 			marginTop: 12,
 				
-		}
-	}
-
-	barGraphView(){
-		return{
-			position: "absolute",
-			bottom: 30,
-			borderRadius: 7,
-			//pass in calculateHeight(i) and calculate for screen height, like progressBarView
-			height: 100, 
-			marginLeft: 7,
-			marginRight: 6,
-			marginBottom: 10,
-			alignItems: "flex-end",
 		}
 	}
 
@@ -195,35 +181,65 @@ export default class Design00 extends React.Component {
 				return 0
 			}
 			else {
-				console.log("h:" + h[i])
-				return h[i]
+				//console.log(h[i])
+				return parseInt(h[i])
 			}
 		}
 	}
 	
 
 	calculateConcentration() {
-		var newConcentration = 1
+		let newConcentration = 1
 		//let distractions = () => this.getValueExit()
 		//console.log("Distraction: "+distractions)
 
-		newConcentration -= (this.state.exit/10)
+		newConcentration += (this.state.complete/100*5)
+		newConcentration -= (this.state.exit/100*2)		
 		
-		
-		if (newConcentration < 0){newConcentration = 0;}
+		if (newConcentration < 0){newConcentration = 0}
 		if (newConcentration > 1){newConcentration = 1}
 		
 		//newConcentration = (newConcentration + this.state.concentration) / 2
 
-		// this.setState((state) => {
-		// 	return{concentration: newConcentration}
-		// })
-
-		return (newConcentration)
+		return newConcentration
 	}
 
+	calculateLevel() {
+		let concentration = this.calculateConcentration()
+		if(concentration < 0.33) {
+			return "Low"
+		}
+		else if(concentration < 0.66) {
+			return "Medium"
+		}
+		else {
+			return "High"
+		}
+	}
 	
-	
+	barGraphView(i){
+		let j = this.calculateHeight(i)
+
+		if(j > 250)
+			j = 250
+
+		return{
+			position: "absolute",
+			bottom: 30,
+			borderRadius: 7,
+			//pass in calculateHeight(i) and calculate for screen height, like progressBarView
+			//maximum height in the screen should be 250
+			//current maximum time length shown is 1000s (16.6min)
+			//the range could be larger, but as we test, it is simpler to show
+			//with smaller range
+			//height: j/4, 
+			height: j,
+			marginLeft: 7,
+			marginRight: 6,
+			marginBottom: 10,
+			alignItems: "flex-end",
+		}
+	}
 
 	render() {
 
@@ -317,15 +333,15 @@ export default class Design00 extends React.Component {
 										bottom: 0,
 									}}>
 									<Text
-										style={styles.textText}>{}</Text>
+										style={styles.textText}> max </Text>
 									<Text
-										style={styles.textTwoText}>6</Text>
+										style={styles.textTwoText}>15</Text>
 									<Text
-										style={styles.textThreeText}>5</Text>
+										style={styles.textThreeText}>10</Text>
 										<Text
-										style={styles.textFourText}>4</Text>
+										style={styles.textFourText}>8</Text>
 									<Text
-										style={styles.textFiveText}>3</Text>
+										style={styles.textFiveText}>5</Text>
 									{/* <View
 										style={{
 											flex: 1,
@@ -333,7 +349,7 @@ export default class Design00 extends React.Component {
 									<Text
 										style={styles.textSixText}>2</Text>
 									<Text
-										style={styles.textSevenText}>1</Text>
+										style={styles.textSevenText}>0</Text>
 								</View>
 								{/* <View
 									pointerEvents="box-none"
@@ -362,7 +378,7 @@ export default class Design00 extends React.Component {
 									}}
 									locations={[0, 1]}
 									colors={["rgb(98, 54, 255)", "rgb(184, 148, 242)"]}
-									style={this.barGraphView()}>
+									style={this.barGraphView(0)}>
 										
 									<View
 										style={styles.rectangleTwoView}/>
@@ -391,7 +407,7 @@ export default class Design00 extends React.Component {
 									}}
 									locations={[0, 1]}
 									colors={["rgb(98, 54, 255)", "rgb(184, 148, 242)"]}
-									style={this.barGraphView()}>
+									style={this.barGraphView(1)}>
 									<View
 										style={styles.rectangleThreeView}/>
 									<Text
@@ -417,7 +433,7 @@ export default class Design00 extends React.Component {
 									}}
 									locations={[0, 1]}
 									colors={["rgb(98, 54, 255)", "rgb(184, 148, 242)"]}
-									style={this.barGraphView()}>
+									style={this.barGraphView(2)}>
 									<View
 										style={styles.rectangleFourView}/>
 										<Text
@@ -444,7 +460,7 @@ export default class Design00 extends React.Component {
 									}}
 									locations={[0, 1]}
 									colors={["rgb(98, 54, 255)", "rgb(184, 148, 242)"]}
-									style={this.barGraphView()}>
+									style={this.barGraphView(3)}>
 									<View
 										style={styles.rectangleFiveView}/>
 										<Text
@@ -470,7 +486,7 @@ export default class Design00 extends React.Component {
 									}}
 									locations={[0, 1]}
 									colors={["rgb(98, 54, 255)", "rgb(184, 148, 242)"]}
-									style={this.barGraphView()}>
+									style={this.barGraphView(4)}>
 									<View
 										style={styles.rectangleSixView}/>
 										<Text
@@ -496,7 +512,7 @@ export default class Design00 extends React.Component {
 									}}
 									locations={[0, 1]}
 									colors={["rgb(98, 54, 255)", "rgb(184, 148, 242)"]}
-									style={this.barGraphView()}>
+									style={this.barGraphView(5)}>
 									<View
 										style={styles.rectangleSevenView}/>
 										<Text
@@ -522,7 +538,7 @@ export default class Design00 extends React.Component {
 									}}
 									locations={[0, 1]}
 									colors={["rgb(98, 54, 255)", "rgb(184, 148, 242)"]}
-									style={this.barGraphView()}>
+									style={this.barGraphView(6)}>
 									<View
 										style={styles.rectangleEightView}/>
 										<Text
@@ -557,9 +573,9 @@ export default class Design00 extends React.Component {
 								alignItems: "flex-start",
 							}}>
 							<Text
-								style={styles.textEightText}>{this.calculateConcentration()*100}%</Text>
+								style={styles.textEightText}>{(this.calculateConcentration()*100).toPrecision(3)}%</Text>
 							<Text
-								style={styles.highText}>High</Text>
+								style={styles.highText}> {this.calculateLevel()} </Text>
 						</View>
 						{/* <Image
 							source={require("./../../assets/images/group-13.png")}
@@ -759,6 +775,7 @@ const styles = StyleSheet.create({
 		backgroundColor: "transparent",
 		width: 8,
 		height: 215,
+		justifyContent: "space-evenly"
 	},
 	textText: {
 		backgroundColor: "transparent",
@@ -768,6 +785,8 @@ const styles = StyleSheet.create({
 		fontWeight: "normal",
 		textAlign: "center",
 		lineHeight: 19,
+		marginLeft: -20,
+		marginTop: 18,
 	},
 	textTwoText: {
 		color: "black",
@@ -777,8 +796,8 @@ const styles = StyleSheet.create({
 		textAlign: "center",
 		lineHeight: 19,
 		backgroundColor: "transparent",
-		marginRight: 1,
-		marginTop: 12,
+		marginLeft: -10,
+		marginTop: 7,
 	},
 	textThreeText: {
 		backgroundColor: "transparent",
@@ -788,7 +807,8 @@ const styles = StyleSheet.create({
 		fontWeight: "normal",
 		textAlign: "center",
 		lineHeight: 19,
-		marginTop: 13,
+		marginLeft: -10,
+		marginTop: 52,
 	},
 	textFiveText: {
 		backgroundColor: "transparent",
@@ -799,7 +819,8 @@ const styles = StyleSheet.create({
 		textAlign: "center",
 		lineHeight: 19,
 		marginRight: 1,
-		marginTop: 45,
+		marginLeft: -10,
+		marginTop: 36,
 	},
 	textSixText: {
 		color: "black",
@@ -809,8 +830,9 @@ const styles = StyleSheet.create({
 		textAlign: "center",
 		lineHeight: 19,
 		backgroundColor: "transparent",
+		marginLeft: -10,
 		marginRight: 1,
-		marginBottom: 13,
+		marginTop: 23,
 	},
 	textSevenText: {
 		backgroundColor: "transparent",
@@ -820,7 +842,9 @@ const styles = StyleSheet.create({
 		fontWeight: "normal",
 		textAlign: "center",
 		lineHeight: 19,
+		marginLeft: -10,
 		marginRight: 1,
+		marginTop: 5,
 	},
 	textFourText: {
 		color: "black",
@@ -829,7 +853,9 @@ const styles = StyleSheet.create({
 		fontWeight: "normal",
 		textAlign: "center",
 		lineHeight: 19,
+		marginLeft: -10,
 		backgroundColor: "transparent",
+		marginTop: 7,
 	},
 	group9View: {
 		position: "relative",
@@ -1060,9 +1086,9 @@ const styles = StyleSheet.create({
 	path2View: {
 		backgroundColor: "rgb(87, 79, 173)",
 		position: "absolute",
-		right: 8,
+		right: 20,
 		width: 319,
-		top: 90,
+		top: 165,
 		height: 2,
 	},
 	group18View: {
@@ -1154,7 +1180,7 @@ const styles = StyleSheet.create({
 		fontWeight: "normal",
 		textAlign: "center",
 		lineHeight: 19,
-		marginLeft: 44,
+		marginLeft: 52,
 	},
 	textElevenText: {
 		color: "black",
@@ -1164,7 +1190,7 @@ const styles = StyleSheet.create({
 		textAlign: "center",
 		lineHeight: 19,
 		backgroundColor: "transparent",
-		marginLeft: 85,
+		marginLeft: 83,
 	},
 	textTwelveText: {
 		backgroundColor: "transparent",
@@ -1174,7 +1200,7 @@ const styles = StyleSheet.create({
 		fontWeight: "normal",
 		textAlign: "center",
 		lineHeight: 19,
-		marginRight: 81,
+		marginRight: 68,
 	},
 	textThirteenText: {
 		backgroundColor: "transparent",
@@ -1184,6 +1210,7 @@ const styles = StyleSheet.create({
 		fontWeight: "normal",
 		textAlign: "center",
 		lineHeight: 19,
+		marginLeft: -20,
 	},
 	group6View: {
 		backgroundColor: "rgb(98, 54, 255)",
