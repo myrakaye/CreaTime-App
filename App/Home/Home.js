@@ -57,10 +57,11 @@ export default class Home extends React.Component {
 						<View
 							pointerEvents="box-none"
 							style={{
+								flex: 1,
+								margin: -15,
 								position: "absolute",
-								right: 117,
-								width: 161,
-								top: 100,
+								width: '70%',
+								top: '12%',
 								height: 80,
 								alignItems: "center",
 							}}>
@@ -72,11 +73,11 @@ export default class Home extends React.Component {
 
 						<View 
 							style={{
+								flex: 1,
 								position: "absolute",
-								right: 125,
-								width: 180,
-								top: 500,
-								height: 80,
+								width: '80%',
+								top: '67%',
+								height: 100,
 								alignItems: "center",
 			
 							}}>
@@ -105,8 +106,11 @@ const styles = StyleSheet.create({
 		justifyContent: "center",
 	},
 	homeTwoView: {
+		flex: 1,
 		backgroundColor: "transparent",
 		height: 736,
+		flexDirection: 'column',
+		alignItems: 'center',
 	},
 	maskImage: {
 		backgroundColor: "transparent",
@@ -139,7 +143,6 @@ const styles = StyleSheet.create({
 		textAlign: "center",
 		letterSpacing: 3.44,
 		backgroundColor: "transparent",
-		marginRight: 6,
-		marginTop: 16,
+		marginTop: '7%',
 	},
 })

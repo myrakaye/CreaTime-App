@@ -16,6 +16,9 @@ import Constants from 'expo-constants';
 import { ProgressCircle } from 'react-native-svg-charts'
 import * as SecureStore from 'expo-secure-store'
 import { useRef } from "react"
+import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
+import { Dimensions} from 'react-native';
+
 
 
 
@@ -25,6 +28,15 @@ const keyForLength = 'Length'
 const keyForComplete = 'Complete'
 const keyForExit = 'Exit'
 //const expKey = 'experiment6'
+
+//standard of ios simulator (iphone 11 pro max): 896 height, 414 width
+//iphone 11: 844 height, 390 width
+//use RFValues(originalSize, standardScreenHeight) to adjust font size
+const screenHeight = Dimensions.get('window').height;
+const screenWidth = Dimensions.get('window').width;
+
+let adjustHeight = (size)=> size*screenHeight/896
+let adjustWidth = (size)=> size*screenWidth/414
 
 export default class Mainpage extends React.Component {
 	constructor(props) {
@@ -157,7 +169,7 @@ export default class Mainpage extends React.Component {
           			
         		}
 			})
-
+s
 			this.getValueLength().then((lengthArray) => {
 				//console.log("length of array:" + lengthArray.length)
         		if (!Array.isArray(lengthArray)) {
@@ -384,12 +396,14 @@ export default class Mainpage extends React.Component {
 				<View
 					pointerEvents="box-none"
 					style={{
+						flex: 3,
+						flexDirection: 'column',
 						height: 336,
 						marginLeft: 20,
 						marginRight: 40,
 						marginTop: 61,
 					}}>
-						<ProgressCircle style={{ height: 340, marginTop: 10, marginRight: 2 }}
+						<ProgressCircle style={{ height: adjustHeight(340), marginTop: "4%", marginLeft: "1%" }}
 						 progress={this.completePortion()} progressColor={'rgb(109, 212, 0)'} >
 							</ProgressCircle>
 					<View
@@ -404,7 +418,7 @@ export default class Mainpage extends React.Component {
 						}}>
 						
 						<TouchableOpacity
-							hitSlop={{ top: 30, bottom: 150, left: 0, right: 80 }}
+							hitSlop={{ top: 0, bottom: "40%", left: 0, right: "70%" }}
 							onPress = {()=>{
 								this.setState({
 									hour: 0,
@@ -441,6 +455,7 @@ export default class Mainpage extends React.Component {
 					<View
 						pointerEvents="box-none"
 						style={{
+							flex: 1,
 							position: "absolute",
 							left: 35,
 							right: 18,
@@ -504,16 +519,17 @@ export default class Mainpage extends React.Component {
 				<View
 					pointerEvents="box-none"
 					style={{
+						flex: 1.8,
 						height: 56,
-						marginLeft: 20,
-						marginRight: 18,
-						marginTop: 31,
 						flexDirection: 'row',
 						justifyContent: 'space-around',
+						alignItems: "center",
+						marginLeft: "-18%",
+						marginRight: "24%",
 					}}>
 						
 					<TouchableOpacity
-						hitSlop={{ top: 10, bottom: 50, left: 100, right: 90 }}
+						hitSlop={{ top: 0, bottom: "60%", left: 0, right: "175%" }}
 						onPress = {()=>{
 							this.setState({
 								hour: this.state.hour+1,
@@ -528,8 +544,10 @@ export default class Mainpage extends React.Component {
 					</View>
 					</TouchableOpacity>
 
+					
+
 					<TouchableOpacity
-						hitSlop={{ top: 10, bottom: 50, left: 80, right: 90 }}
+						hitSlop={{ top: 0, bottom: "60%", left: 0, right: "175%" }}
 						onPress = {()=>{
 							if(this.state.minute == 59) {
 								this.setState({
@@ -592,32 +610,35 @@ const styles = StyleSheet.create({
 	design01View: {
 		backgroundColor: "rgb(98, 54, 255)",
 		flex: 1,
+		flexDirection:'column',
+		height: "100%",
+		width: "100%",
 	},
 	cancelView: {
-		marginTop: -35,
+		flex: 1,
+		flexDirection: "row",
+		marginTop: "100%",
 		backgroundColor: "rgba(0, 0, 0, 0.2)",
 		borderRadius: 12.83,
 		position: "absolute",
-		marginLeft: 0,
 		width: 70,
-		top: 0,
-		height: 40,
+		height: 110,
 		justifyContent: "center",
-		alignItems: "flex-start",
+		alignItems: "center",
 	},
 	labelTwoText: {
 		
 		color: "white",
 		fontFamily: ".AppleSystemUIFont",
-		fontSize: 18,
+		fontSize: adjustHeight(16)**adjustHeight(1),
 		fontStyle: "normal",
 		fontWeight: "normal",
-		textAlign: "left",
+		textAlign: "center",
 		lineHeight: 24,
 		backgroundColor: "transparent",
-		marginLeft: 8,
 	},
 	groupView: {
+		flex: 1,
 		backgroundColor: "transparent",
 		alignSelf: "center",
 		width: 400,
@@ -629,7 +650,7 @@ const styles = StyleSheet.create({
 	titleText: {
 		backgroundColor: "transparent",
 		color: "white",
-		fontSize: 37,
+		fontSize: adjustHeight(33)**adjustHeight(1),
 		fontStyle: "normal",
 		fontWeight: "normal",
 		textAlign: "center",
@@ -638,7 +659,7 @@ const styles = StyleSheet.create({
 		alignSelf: "stretch",
 		marginLeft: 10,
 		marginRight: 1,
-		marginTop: 32,
+		marginTop: 28,
 	},
 	rectangleView: {
 		backgroundColor: "white",
@@ -691,37 +712,24 @@ const styles = StyleSheet.create({
 		height: "100%",
 	},
 	group7View: {
+		flex: 1,
+		flexDirection: "row",
 		backgroundColor: "rgba(0, 0, 0, 0.2)",
 		borderRadius: 12.83,
 		position: "absolute",
-		marginLeft: -100,
-		width: 170,
-		top: 0,
-		height: 55,
-		justifyContent: "center",
-		alignItems: "flex-start",
+		width: adjustWidth(170),
+		height: adjustHeight(55),
+		alignItems: "center",
 	},
 	group7Right: {
+		flex: 1,
+		flexDirection: "row",
 		backgroundColor: "rgba(0, 0, 0, 0.2)",
 		borderRadius: 12.83,
 		position: "absolute",
-		marginLeft: -80,
-		marginRight: 30,
-		width: 170,
-		top: 0,
-		height: 55,
-		justifyContent: "center",
-		alignItems: "flex-end",
-	},
-	nameCopyText: {
-		backgroundColor: "transparent",
-		color: "white",
-		fontSize: 18,
-		fontStyle: "normal",
-		fontWeight: "normal",
-		textAlign: "left",
-		lineHeight: 24,
-		marginLeft: 42,
+		width: adjustWidth(170),
+		height: adjustHeight(55),
+		alignItems: "center",
 	},
 	group6View: {
 		backgroundColor: "transparent",
@@ -739,34 +747,43 @@ const styles = StyleSheet.create({
 	},
 	nameText: {
 		color: "white",
-		fontSize: 18,
+		fontSize: adjustHeight(18)**adjustHeight(1),
 		fontStyle: "normal",
 		fontWeight: "normal",
-		textAlign: "left",
+		textAlign: "center",
+		width: '100%',
+		textAlignVertical: "center",
 		lineHeight: 24,
 		backgroundColor: "transparent",
-		marginRight: 30,
 	},
-	group2View: {
+	nameCopyText: {
+		backgroundColor: "transparent",
+		color: "white",
+		fontSize: adjustHeight(18)**adjustHeight(1),
+		fontStyle: "normal",
+		fontWeight: "normal",
+		textAlign: "center",
+		lineHeight: 24,
+		width: '100%',
+	},
+	group2View: {	
 		backgroundColor: "white",
 		borderRadius: 12.83,
-		height: 55,
-		marginLeft: 20,
-		marginRight: 20,
-		marginTop: 19,
+		height: adjustHeight(55),
+		marginLeft: "7%",
+		marginRight: "7%",
+		marginTop: 0,
 		justifyContent: "center",
-		alignItems: "flex-start",
 	},
 	labelText: {
 		backgroundColor: "transparent",
 		color: "rgb(31, 31, 55)",
 		fontFamily: ".AppleSystemUIFont",
-		fontSize: 18,
+		fontSize: adjustHeight(18)**adjustHeight(1),
 		fontStyle: "normal",
 		fontWeight: "normal",
-		textAlign: "left",
-		lineHeight: 24,
-		marginLeft: 120,
+		textAlign: "center",
+		lineHeight: 24,	
 	},
 	homeIndicatorView: {
 		backgroundColor: "black",

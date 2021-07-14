@@ -14,12 +14,20 @@ import { LinearGradient } from "expo-linear-gradient"
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { useRef, useState, useEffect } from 'react';
 import * as SecureStore from 'expo-secure-store';
+import { Dimensions} from 'react-native';
 
 const keyForDate = 'Date'
 const keyForTime = 'Time'
 const keyForLength = 'Length'
 const keyForComplete = 'Complete'
 const keyForExit = 'Exit'
+
+const screenHeight = Dimensions.get('window').height;
+const screenWidth = Dimensions.get('window').width;
+
+let adjustHeight = (size)=> size*screenHeight/896
+let adjustWidth = (size)=> size*screenWidth/414
+let adjustFont = (size)=> adjustHeight(size)**adjustHeight(1)
 
 export default class Design00 extends React.Component {
 
@@ -148,7 +156,7 @@ export default class Design00 extends React.Component {
 			width: 333*this.calculateConcentration(),
 			marginLeft: 0,
 			marginRight: -8,
-			marginTop: 12,
+			marginTop: "8.5%",
 				
 		}
 	}
@@ -248,10 +256,10 @@ export default class Design00 extends React.Component {
 				<View
 					pointerEvents="box-none"
 					style={{
+						flex: 1,
 						height: 55,
-						marginLeft: 22,
-						marginRight: 63,
-						marginTop: 65,
+						marginLeft: "4%",
+						marginTop: "5%",
 						flexDirection: "row",
 						alignItems: "flex-start",
 					}}>
@@ -265,6 +273,7 @@ export default class Design00 extends React.Component {
 				<View
 					pointerEvents="box-none"
 					style={{
+						flex: 1,
 						height: 59,
 						marginLeft: 20,
 						marginRight: 20,
@@ -299,6 +308,7 @@ export default class Design00 extends React.Component {
 				<View
 					pointerEvents="box-none"
 					style={{
+						flex: 4,
 						height: 287,
 						marginLeft: 20,
 						marginRight: 20,
@@ -556,6 +566,13 @@ export default class Design00 extends React.Component {
 					<View
 						style={styles.path2View}/>
 				</View>
+
+				{/* Add blank view to seperate graphs */}
+				<View
+					style={{
+						flex: 3,
+					}}/>
+
 				<View
 					style={styles.group18View}>
 					<View
@@ -570,7 +587,7 @@ export default class Design00 extends React.Component {
 								marginLeft: 3,
 								marginTop: 1,
 								flexDirection: "row",
-								alignItems: "flex-start",
+								alignItems: "center",
 							}}>
 							<Text
 								style={styles.textEightText}>{(this.calculateConcentration()*100).toPrecision(3)}%</Text>
@@ -601,10 +618,7 @@ export default class Design00 extends React.Component {
 								
 							</View>
 
-						<View
-							style={{
-								flex: 1,
-							}}/>
+						
 						<View
 							pointerEvents="box-none"
 							style={{
@@ -635,25 +649,28 @@ export default class Design00 extends React.Component {
 					style={{
 						flex: 1,
 					}}/>
-				<TouchableOpacity
-					onPress = {()=>this.props.navigation.navigate('Mainpage')}
-				>
+			
 				<View
 					pointerEvents="box-none"
 					style={{
 						alignSelf: "center",
 						width: 68,
 						height: 68,
-						marginBottom: 30,
+						bottom: 30,
 					}}>
-					
-				
+
+					<TouchableOpacity
+					hitSlop={{ top: 0, bottom: "70%", left: 0, right: "10%" }}
+					onPress = {()=>this.props.navigation.navigate('Mainpage')}
+				>
 					<View
-						style={styles.group6View}/>
+						style={styles.group6View}>
 					<Text
 						style={styles.backText}>BACK</Text>
+					</View>
+							</TouchableOpacity>
 				</View>
-				</TouchableOpacity>
+			
 
 
 				<View
@@ -666,11 +683,13 @@ const styles = StyleSheet.create({
 	design00View: {
 		backgroundColor: "white",
 		flex: 1,
+		flexDirection: 'column',
+		justifyContent: 'center',
 	},
 	titleText: {
 		backgroundColor: "transparent",
 		color: "black",
-		fontSize: 37,
+		fontSize: adjustFont(37),
 		fontStyle: "normal",
 		fontWeight: "normal",
 		textAlign: "left",
@@ -687,7 +706,7 @@ const styles = StyleSheet.create({
 	averageProductivityText: {
 		backgroundColor: "transparent",
 		color: "black",
-		fontSize: 11,
+		fontSize: adjustFont(11),
 		fontStyle: "normal",
 		fontWeight: "normal",
 		textAlign: "left",
@@ -699,7 +718,7 @@ const styles = StyleSheet.create({
 	hPerWeekText: {
 		backgroundColor: "transparent",
 		color: "black",
-		fontSize: 25,
+		fontSize: adjustFont(25),
 		fontStyle: "normal",
 		fontWeight: "normal",
 		textAlign: "left",
@@ -724,7 +743,7 @@ const styles = StyleSheet.create({
 	coffePlaceText: {
 		color: "black",
 		fontFamily: ".AppleSystemUIFont",
-		fontSize: 16,
+		fontSize: adjustFont(16),
 		fontStyle: "normal",
 		fontWeight: "normal",
 		textAlign: "right",
@@ -1095,15 +1114,16 @@ const styles = StyleSheet.create({
 		backgroundColor: "rgb(235, 248, 231)",
 		borderRadius: 25,
 		alignSelf: "flex-end",
-		width: 374,
-		height: 119,
+		width: adjustWidth(374),
+		height: adjustHeight(119),
 		marginRight: 14,
-		marginTop: 86,
+		
 		justifyContent: "center",
 	},
 	group15View: {
+		flex: 1,
 		backgroundColor: "transparent",
-		height: 91,
+		height: adjustHeight(91),
 		marginLeft: 13,
 		marginRight: 16,
 		alignItems: "flex-start",
@@ -1111,7 +1131,7 @@ const styles = StyleSheet.create({
 	yourConcentrationText: {
 		backgroundColor: "transparent",
 		color: "black",
-		fontSize: 11,
+		fontSize: adjustFont(11),
 		fontStyle: "normal",
 		fontWeight: "normal",
 		textAlign: "left",
@@ -1120,7 +1140,7 @@ const styles = StyleSheet.create({
 	},
 	textEightText: {
 		color: "black",
-		fontSize: 19,
+		fontSize: adjustFont(19),
 		fontStyle: "normal",
 		fontWeight: "normal",
 		textAlign: "left",
@@ -1130,7 +1150,7 @@ const styles = StyleSheet.create({
 	},
 	highText: {
 		color: "rgba(0, 0, 0, 0.5)",
-		fontSize: 11,
+		fontSize: adjustFont(13),
 		fontStyle: "normal",
 		fontWeight: "normal",
 		textAlign: "left",
@@ -1151,8 +1171,9 @@ const styles = StyleSheet.create({
 	// },
 	progressBarViewLinearGradient: {
 		borderRadius: 7,
-		height: 15,
+		height: adjustHeight(15),
 		alignItems: "flex-end",
+		marginTop: "-1%",
 	},
 	// progressBarView: {
 	// 	backgroundColor: "transparent",
@@ -1166,7 +1187,7 @@ const styles = StyleSheet.create({
 	textNineText: {
 		backgroundColor: "transparent",
 		color: "black",
-		fontSize: 11,
+		fontSize: adjustFont(11),
 		fontStyle: "normal",
 		fontWeight: "normal",
 		textAlign: "center",
@@ -1175,7 +1196,7 @@ const styles = StyleSheet.create({
 	textTenText: {
 		backgroundColor: "transparent",
 		color: "black",
-		fontSize: 11,
+		fontSize: adjustFont(11),
 		fontStyle: "normal",
 		fontWeight: "normal",
 		textAlign: "center",
@@ -1184,7 +1205,7 @@ const styles = StyleSheet.create({
 	},
 	textElevenText: {
 		color: "black",
-		fontSize: 11,
+		fontSize: adjustFont(11),
 		fontStyle: "normal",
 		fontWeight: "normal",
 		textAlign: "center",
@@ -1195,7 +1216,7 @@ const styles = StyleSheet.create({
 	textTwelveText: {
 		backgroundColor: "transparent",
 		color: "black",
-		fontSize: 11,
+		fontSize: adjustFont(11),
 		fontStyle: "normal",
 		fontWeight: "normal",
 		textAlign: "center",
@@ -1205,7 +1226,7 @@ const styles = StyleSheet.create({
 	textThirteenText: {
 		backgroundColor: "transparent",
 		color: "black",
-		fontSize: 11,
+		fontSize: adjustFont(11),
 		fontStyle: "normal",
 		fontWeight: "normal",
 		textAlign: "center",
@@ -1213,6 +1234,7 @@ const styles = StyleSheet.create({
 		marginLeft: -20,
 	},
 	group6View: {
+		flex: 1,
 		backgroundColor: "rgb(98, 54, 255)",
 		borderRadius: 33.9,
 		shadowColor: "rgba(110, 98, 226, 0.62)",
@@ -1221,12 +1243,11 @@ const styles = StyleSheet.create({
 		position: "absolute",
 		alignSelf: "center",
 		width: 68,
-		bottom: 0,
 		height: 68,
 	},
 	backText: {
 		color: "rgb(252, 249, 249)",
-		fontSize: 11,
+		fontSize: adjustFont(13),
 		fontStyle: "normal",
 		fontWeight: "normal",
 		textAlign: "left",
