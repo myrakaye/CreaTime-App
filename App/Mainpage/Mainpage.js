@@ -630,7 +630,7 @@ const styles = StyleSheet.create({
 		
 		color: "white",
 		fontFamily: ".AppleSystemUIFont",
-		fontSize: adjustHeight(16)*adjustHeight(1),
+		fontSize: adjustHeight(16)**adjustHeight(1),
 		fontStyle: "normal",
 		fontWeight: "normal",
 		textAlign: "center",
@@ -650,7 +650,7 @@ const styles = StyleSheet.create({
 	titleText: {
 		backgroundColor: "transparent",
 		color: "white",
-		fontSize: adjustHeight(33)*adjustHeight(1),
+		fontSize: adjustHeight(33)**adjustHeight(1),
 		fontStyle: "normal",
 		fontWeight: "normal",
 		textAlign: "center",
@@ -747,7 +747,7 @@ const styles = StyleSheet.create({
 	},
 	nameText: {
 		color: "white",
-		fontSize: adjustHeight(18)*adjustHeight(1),
+		fontSize: adjustHeight(18)**adjustHeight(1),
 		fontStyle: "normal",
 		fontWeight: "normal",
 		textAlign: "center",
@@ -759,7 +759,7 @@ const styles = StyleSheet.create({
 	nameCopyText: {
 		backgroundColor: "transparent",
 		color: "white",
-		fontSize: adjustHeight(18)*adjustHeight(1),
+		fontSize: adjustHeight(18)**adjustHeight(1),
 		fontStyle: "normal",
 		fontWeight: "normal",
 		textAlign: "center",
@@ -779,7 +779,7 @@ const styles = StyleSheet.create({
 		backgroundColor: "transparent",
 		color: "rgb(31, 31, 55)",
 		fontFamily: ".AppleSystemUIFont",
-		fontSize: adjustHeight(18)*adjustHeight(1),
+		fontSize: adjustHeight(18)**adjustHeight(1),
 		fontStyle: "normal",
 		fontWeight: "normal",
 		textAlign: "center",

@@ -10,6 +10,7 @@ import React from "react"
 import { Image, StyleSheet, Text, View } from "react-native"
 
 import { TouchableOpacity } from 'react-native-gesture-handler'
+import { RFPercentage } from "react-native-responsive-fontsize"
 import Mainpage from "../../App/Mainpage/Mainpage"
 
 export default class Home extends React.Component {
@@ -61,7 +62,7 @@ export default class Home extends React.Component {
 								margin: -15,
 								position: "absolute",
 								width: '70%',
-								top: '12%',
+								top: '20%',
 								height: 80,
 								alignItems: "center",
 							}}>
@@ -74,9 +75,9 @@ export default class Home extends React.Component {
 						<View 
 							style={{
 								flex: 1,
-								position: "absolute",
+								position: "relative",
 								width: '80%',
-								top: '67%',
+								top: '60%',
 								height: 100,
 								alignItems: "center",
 			
@@ -84,7 +85,7 @@ export default class Home extends React.Component {
 								<TouchableOpacity
 									onPress = {()=>this.props.navigation.navigate('Mainpage')}
 								> 
-							<Text style={styles.startText}> Start! </Text>
+							<Text style={styles.startText}>Start!</Text>
 							</TouchableOpacity>
 						</View>
 					</View>
@@ -102,13 +103,13 @@ const styles = StyleSheet.create({
 	home2View: {
 		flexDirection: "column",
 		backgroundColor: "transparent",
-		height: 736,
+		height: "100%",
 		justifyContent: "center",
 	},
 	homeTwoView: {
 		flex: 1,
 		backgroundColor: "transparent",
-		height: 736,
+		height: "100%",
 		flexDirection: 'column',
 		alignItems: 'center',
 	},
@@ -116,12 +117,12 @@ const styles = StyleSheet.create({
 		backgroundColor: "transparent",
 		resizeMode: "cover",
 		width: null,
-		height: 810,
+		height: "100%",
 	},
 	creatimeText: {
 		backgroundColor: "transparent",
 		color: "white",
-		fontSize: 38.4,
+		fontSize: RFPercentage(5),
 		fontStyle: "normal",
 		fontWeight: "normal",
 		textAlign: "center",
@@ -131,13 +132,13 @@ const styles = StyleSheet.create({
 		fontStyle: "normal",
 		backgroundColor: "transparent",
 		color: "white",
-		fontSize: 55,
+		fontSize: RFPercentage(8),
 		fontWeight: "bold",
 		textAlign: "center",
 	},
 	keepYourFocusText: {
 		color: "white",
-		fontSize: 13,
+		fontSize: RFPercentage(1.25),
 		fontStyle: "normal",
 		fontWeight: "normal",
 		textAlign: "center",
