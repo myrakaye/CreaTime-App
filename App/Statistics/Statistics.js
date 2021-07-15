@@ -27,7 +27,7 @@ const screenWidth = Dimensions.get('window').width;
 
 let adjustHeight = (size)=> size*screenHeight/896
 let adjustWidth = (size)=> size*screenWidth/414
-let adjustFont = (size)=> adjustHeight(size)**adjustHeight(1)
+let adjustFont = (size)=> adjustHeight(size)*adjustHeight(1)
 
 export default class Design00 extends React.Component {
 
