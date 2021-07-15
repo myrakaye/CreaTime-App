@@ -1,7 +1,8 @@
 {
   "expo": {
-    "name": "Creatime-screens",
+    "name": "CreaTime",
     "privacy": "public",
+    "icon": "",
     "platforms": [
       "ios",
       "android"
@@ -14,8 +15,14 @@
     "assetBundlePatterns": [
       "**/*"
     ],
+    "slug": "",
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "creatime"
+    },
+    "android": {
+      "package": "creatime",
+      "versionCode": 1
     }
   }
 }
