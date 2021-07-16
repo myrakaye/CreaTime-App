@@ -38,6 +38,15 @@ const screenWidth = Dimensions.get('window').width;
 let adjustHeight = (size)=> size*screenHeight/1000
 let adjustWidth = (size)=> size*screenWidth/414
 
+let adjustFont = (size)=> {
+	if(screenHeight < 844) {
+		return adjustHeight(size)
+	}
+	else {
+		return adjustHeight(size)*adjustHeight(1)
+	}
+}
+
 export default class Mainpage extends React.Component {
 	constructor(props) {
 		super(props)
@@ -411,16 +420,14 @@ s
 					<View
 						pointerEvents="box-none"
 						style={{
-							
-						
+
 							width: 276,
-							
 							height: 192,
 							alignItems: "flex-start",
 						}}>
 						
 						<TouchableOpacity
-							hitSlop={{ top: 0, bottom: "40%", left: 0, right: "70%" }}
+							hitSlop={{ top: 50, bottom: 50, left: 50, right: 80 }}
 							onPress = {()=>{
 								this.setState({
 									hour: 0,
@@ -435,6 +442,7 @@ s
 							<Text
 								style={styles.labelTwoText}> Clear </Text>
 							</View>
+							
 						</TouchableOpacity>
 						
 					
@@ -533,7 +541,7 @@ s
 					}}>
 						
 					<TouchableOpacity
-						hitSlop={{ top: 0, bottom: "60%", left: 0, right: "175%" }}
+						hitSlop={{ top: 0, bottom: adjustHeight(55), left: 0, right: adjustWidth(170) }}
 						onPress = {()=>{
 							this.setState({
 								hour: this.state.hour+1,
@@ -551,7 +559,7 @@ s
 					
 
 					<TouchableOpacity
-						hitSlop={{ top: 0, bottom: "60%", left: 0, right: "175%" }}
+						hitSlop={{ top: 0, bottom: adjustHeight(55), left: 0, right: adjustWidth(170) }}
 						onPress = {()=>{
 							if(this.state.minute == 59) {
 								this.setState({
@@ -619,14 +627,11 @@ const styles = StyleSheet.create({
 		width: "100%",
 	},
 	cancelView: {
-		flex: 1,
-		flexDirection: "row",
-		marginTop: "100%",
 		backgroundColor: "rgba(0, 0, 0, 0.2)",
 		borderRadius: 12.83,
-		position: "absolute",
-		width: 70,
-		height: 110,
+
+		width: adjustHeight(70),
+		height: adjustHeight(50),
 		justifyContent: "center",
 		alignItems: "center",
 	},
@@ -634,7 +639,7 @@ const styles = StyleSheet.create({
 		
 		color: "white",
 		fontFamily: ".AppleSystemUIFont",
-		fontSize: adjustHeight(16)*adjustHeight(1),
+		fontSize: adjustFont(16),
 		fontStyle: "normal",
 		fontWeight: "normal",
 		textAlign: "center",
@@ -649,11 +654,11 @@ const styles = StyleSheet.create({
 		width: 400,
 		height: 105,
 		alignItems: "center",
-		marginTop: "10%",
+		marginTop: "7%",
 	},
 	titleText: {
 		color: "white",
-		fontSize: adjustHeight(33)*adjustHeight(1),
+		fontSize: adjustFont(33),
 		fontStyle: "normal",
 		fontWeight: "normal",
 		textAlign: "center",
@@ -748,7 +753,7 @@ const styles = StyleSheet.create({
 	},
 	nameText: {
 		color: "white",
-		fontSize: adjustHeight(18)*adjustHeight(1),
+		fontSize: adjustFont(18),
 		fontStyle: "normal",
 		fontWeight: "normal",
 		textAlign: "center",
@@ -760,7 +765,7 @@ const styles = StyleSheet.create({
 	nameCopyText: {
 		backgroundColor: "transparent",
 		color: "white",
-		fontSize: adjustHeight(18)*adjustHeight(1),
+		fontSize: adjustFont(18),
 		fontStyle: "normal",
 		fontWeight: "normal",
 		textAlign: "center",
@@ -780,7 +785,7 @@ const styles = StyleSheet.create({
 		backgroundColor: "transparent",
 		color: "rgb(31, 31, 55)",
 		fontFamily: ".AppleSystemUIFont",
-		fontSize: adjustHeight(18)*adjustHeight(1),
+		fontSize: adjustFont(18),
 		fontStyle: "normal",
 		fontWeight: "normal",
 		textAlign: "center",

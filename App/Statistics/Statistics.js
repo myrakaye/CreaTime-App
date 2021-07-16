@@ -28,7 +28,14 @@ const screenWidth = Dimensions.get('window').width;
 
 let adjustHeight = (size)=> size*screenHeight/896
 let adjustWidth = (size)=> size*screenWidth/414
-let adjustFont = (size)=> adjustHeight(size)*adjustHeight(1)
+let adjustFont = (size)=> {
+	if(screenHeight < 844) {
+		return adjustHeight(size)
+	}
+	else {
+		return adjustHeight(size)*adjustHeight(1)
+	}
+}
 
 export default class Design00 extends React.Component {
 
@@ -1008,25 +1015,28 @@ const styles = StyleSheet.create({
 	group6View: {
 		flex: 1,
 		backgroundColor: "rgb(98, 54, 255)",
-		borderRadius: 33.9,
+		borderRadius: 53.9,
 		shadowColor: "rgba(110, 98, 226, 0.62)",
 		shadowRadius: 9,
 		shadowOpacity: 1,
 		position: "absolute",
 		alignSelf: "center",
-		width: 68,
-		height: 68,
+		width: adjustHeight(68),
+		height: adjustHeight(68),
+		alignItems: "center",
+		justifyContent: "center",
+		marginTop: "10%"
 	},
 	backText: {
 		color: "rgb(252, 249, 249)",
 		fontSize: adjustFont(12),
 		fontStyle: "normal",
 		fontWeight: "normal",
-		textAlign: "left",
+		textAlign: "center",
 		backgroundColor: "transparent",
 		position: "absolute",
 		alignSelf: "center",
-		bottom: 27,
+		
 	},
 	homeIndicatorView: {
 		backgroundColor: "rgba(0, 0, 0, 0.2)",

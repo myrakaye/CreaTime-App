@@ -15,7 +15,14 @@ import { Dimensions} from 'react-native';
 
 const screenHeight = Dimensions.get('window').height;
 let adjustHeight = (size)=> size*screenHeight/896
-let adjustFont = (size)=> adjustHeight(size)*adjustHeight(1)
+let adjustFont = (size)=> {
+	if(screenHeight < 844) {
+		return adjustHeight(size)
+	}
+	else {
+		return adjustHeight(size)*adjustHeight(1)
+	}
+}
 
 export default class Home extends React.Component {
 

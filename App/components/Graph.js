@@ -5,7 +5,14 @@ import { Dimensions} from 'react-native';
 
 const screenHeight = Dimensions.get('window').height;
 let adjustHeight = (size)=> size*screenHeight/896
-let adjustFont = (size)=> adjustHeight(size)*adjustHeight(1)
+let adjustFont = (size)=> {
+	if(screenHeight < 844) {
+		return adjustHeight(size)
+	}
+	else {
+		return adjustHeight(size)*adjustHeight(1)
+	}
+}
 
 export default function Graph(props) {
   function calculateDate(i) {
@@ -23,18 +30,11 @@ export default function Graph(props) {
     }
   }
 
-  function calculateHeight(i) {
-    let h = props.data.lengthList;
-    if (!Array.isArray(h)) {
-      return 0;
-    } else {
-      if (i >= h.length) {
-        return 0;
-      } else {
-        //console.log(h[i])
-        return parseInt(h[i]);
-      }
-    }
+  function calculateHeight(item) {
+    if(item > 225)
+      return 225
+    else
+      return item
   }
 
   console.log(props)
@@ -66,7 +66,7 @@ export default function Graph(props) {
                   }}
                   locations={[0, 1]}
                   colors={['rgb(98, 54, 255)', 'rgb(184, 148, 242)']}
-                  style={[styles.bar, {height: item}]}
+                  style={[styles.bar, {height: adjustHeight(calculateHeight(item))}]}
                 />
                 <View />
                 <Text style={styles.monText}> {calculateDate(index)} </Text>
