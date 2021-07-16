@@ -312,7 +312,7 @@ export default class Design00 extends React.Component {
 				{/* Add blank view to seperate graphs */}
 				<View
 					style={{
-						flex: 3,
+						flex: 1,
 					}}/>
 
 				<View
@@ -915,7 +915,7 @@ const styles = StyleSheet.create({
 		borderRadius: 7,
 		height: adjustHeight(15),
 		alignItems: "flex-end",
-		marginTop: "-1%",
+		marginTop: "1%",
 	},
 	// progressBarView: {
 	// 	backgroundColor: "transparent",
@@ -982,10 +982,11 @@ const styles = StyleSheet.create({
 		shadowColor: "rgba(110, 98, 226, 0.62)",
 		shadowRadius: 9,
 		shadowOpacity: 1,
-		position: "absolute",
+		//position: "relative",
 		alignSelf: "center",
 		width: 68,
-		height: 68,
+		minHeight: 68,
+		marginTop: "10%"
 	},
 	backText: {
 		color: "rgb(252, 249, 249)",

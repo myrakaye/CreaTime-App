@@ -74,7 +74,11 @@ export default class Home extends React.Component {
 						<View 
 							style={{
 								flex: 1,
+<<<<<<< HEAD
 								position: "absolute",
+=======
+								//position: "relative",
+>>>>>>> parent of 2e9a68df (Revert "responsive font?")
 								width: '80%',
 								top: '67%',
 								height: 100,
@@ -115,8 +119,13 @@ const styles = StyleSheet.create({
 	maskImage: {
 		backgroundColor: "transparent",
 		resizeMode: "cover",
+<<<<<<< HEAD
 		width: null,
 		height: 810,
+=======
+		width: "100%",
+		height: "100%",
+>>>>>>> parent of 2e9a68df (Revert "responsive font?")
 	},
 	creatimeText: {
 		backgroundColor: "transparent",
@@ -125,13 +134,19 @@ const styles = StyleSheet.create({
 		fontStyle: "normal",
 		fontWeight: "normal",
 		textAlign: "center",
+		//top: "10%",
 	},
 	startText: {
 		fontFamily: "Gill Sans",
 		fontStyle: "normal",
 		backgroundColor: "transparent",
 		color: "white",
+<<<<<<< HEAD
 		fontSize: 55,
+=======
+		fontSize: RFPercentage(8),
+		//fontSize: 50,
+>>>>>>> parent of 2e9a68df (Revert "responsive font?")
 		fontWeight: "bold",
 		textAlign: "center",
 	},
@@ -143,6 +158,6 @@ const styles = StyleSheet.create({
 		textAlign: "center",
 		letterSpacing: 3.44,
 		backgroundColor: "transparent",
-		marginTop: '7%',
+		marginTop: '5%',
 	},
 })
