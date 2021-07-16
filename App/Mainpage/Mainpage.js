@@ -414,6 +414,29 @@ s
 						marginRight: 40,
 						marginTop: 61,
 					}}>
+						
+						<View style = {styles.cancelView}>
+						<TouchableOpacity
+							hitSlop={{ top: 0, bottom: adjustHeight(50), left: 0, right: adjustHeight(70) }}
+							onPress = {()=>{
+								this.setState({
+									hour: 0,
+									minute: 0,
+									second: 0,
+									length: 0,
+									total: 0,
+								})
+							}}
+						>
+							<View>
+							<Text
+								style={styles.labelTwoText}> Clear </Text>
+							</View>
+							
+						</TouchableOpacity>
+						</View>
+
+
 						<ProgressCircle style={{ height: adjustHeight(340), marginTop: "4%", marginLeft: "1%" }}
 						 progress={this.completePortion()} progressColor={'rgb(109, 212, 0)'} >
 							
@@ -426,24 +449,7 @@ s
 							alignItems: "flex-start",
 						}}>
 						
-						<TouchableOpacity
-							hitSlop={{ top: 50, bottom: 50, left: 50, right: 80 }}
-							onPress = {()=>{
-								this.setState({
-									hour: 0,
-									minute: 0,
-									second: 0,
-									length: 0,
-									total: 0,
-								})
-							}}
-						>
-							<View style={styles.cancelView}>
-							<Text
-								style={styles.labelTwoText}> Clear </Text>
-							</View>
-							
-						</TouchableOpacity>
+						
 						
 					
 						<View
@@ -654,7 +660,7 @@ const styles = StyleSheet.create({
 		width: 400,
 		height: 105,
 		alignItems: "center",
-		marginTop: "7%",
+		marginTop: "11%",
 	},
 	titleText: {
 		color: "white",
@@ -665,7 +671,6 @@ const styles = StyleSheet.create({
 		lineHeight: 45,
 		letterSpacing: 0.41,
 		alignSelf: "stretch",
-	
 	},
 	rectangleView: {
 		backgroundColor: "white",
