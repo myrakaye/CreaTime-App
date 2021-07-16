@@ -893,7 +893,7 @@ const styles = StyleSheet.create({
 		width: adjustWidth(374),
 		height: adjustHeight(119)*1,
 		marginRight: 14,
-		
+		marginBottom: 10,
 		justifyContent: "center",
 	},
 	group15View: {
