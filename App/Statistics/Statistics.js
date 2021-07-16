@@ -277,10 +277,10 @@ export default class Design00 extends React.Component {
 				<View
 					pointerEvents="box-none"
 					style={{
-						flex: 4,
+						flex: 5,
 						height: 100,
 						marginLeft: "4%",
-						marginTop: "4%",
+						marginTop: "2%",
 						flexDirection: "row",
 						alignItems: "flex-start",
 					}}>
@@ -422,16 +422,16 @@ export default class Design00 extends React.Component {
 				</View>
 				<View
 					style={{
-						flex: 3,
+						flex: 1,
 					}}/>
 			
 				<View
 					pointerEvents="box-none"
 					style={{
+						flex: 4,
 						alignSelf: "center",
 						width: 68,
 						height: 68,
-						bottom: 30,
 					}}>
 
 					<TouchableOpacity
@@ -445,11 +445,6 @@ export default class Design00 extends React.Component {
 					</View>
 							</TouchableOpacity>
 				</View>
-			
-
-
-				<View
-					style={styles.homeIndicatorView}/>
 			</View>
 	}
 }
@@ -468,8 +463,10 @@ const styles = StyleSheet.create({
 		fontStyle: "normal",
 		fontWeight: "normal",
 		textAlign: "left",
-		lineHeight: 80,
+		height: 80,
 		letterSpacing: 0.41,
+		left: "8%",
+		marginTop: "2%",
 	},
 	group12Image: {
 		resizeMode: "center",
@@ -487,9 +484,7 @@ const styles = StyleSheet.create({
 		fontWeight: "normal",
 		textAlign: "left",
 		lineHeight: 20,
-	
-		left: 2,
-		top: 0,
+		left: "8%",
 	},
 	hPerWeekText: {
 		flex: 2.8,
@@ -499,9 +494,9 @@ const styles = StyleSheet.create({
 		fontStyle: "normal",
 		fontWeight: "normal",
 		textAlign: "left",
-		lineHeight: 60,
+		height: 60,
 		left: '8%',
-
+		marginTop: "2%",
 	},
 	componentsButtonCoffePlaceView: {
 		backgroundColor: "white",
@@ -572,86 +567,6 @@ const styles = StyleSheet.create({
 		height: 215,
 		justifyContent: "space-evenly"
 	},
-	textText: {
-		backgroundColor: "transparent",
-		color: "black",
-		fontSize: 11,
-		fontStyle: "normal",
-		fontWeight: "normal",
-		textAlign: "center",
-		lineHeight: 19,
-		marginLeft: -20,
-		marginTop: 18,
-	},
-	textTwoText: {
-		color: "black",
-		fontSize: 11,
-		fontStyle: "normal",
-		fontWeight: "normal",
-		textAlign: "center",
-		lineHeight: 19,
-		backgroundColor: "transparent",
-		marginLeft: -10,
-		marginTop: 7,
-	},
-	textThreeText: {
-		backgroundColor: "transparent",
-		color: "black",
-		fontSize: 11,
-		fontStyle: "normal",
-		fontWeight: "normal",
-		textAlign: "center",
-		lineHeight: 19,
-		marginLeft: -10,
-		marginTop: 52,
-	},
-	textFiveText: {
-		backgroundColor: "transparent",
-		color: "black",
-		fontSize: 11,
-		fontStyle: "normal",
-		fontWeight: "normal",
-		textAlign: "center",
-		lineHeight: 19,
-		marginRight: 1,
-		marginLeft: -10,
-		marginTop: 36,
-	},
-	textSixText: {
-		color: "black",
-		fontSize: 11,
-		fontStyle: "normal",
-		fontWeight: "normal",
-		textAlign: "center",
-		lineHeight: 19,
-		backgroundColor: "transparent",
-		marginLeft: -10,
-		marginRight: 1,
-		marginTop: 23,
-	},
-	textSevenText: {
-		backgroundColor: "transparent",
-		color: "black",
-		fontSize: 11,
-		fontStyle: "normal",
-		fontWeight: "normal",
-		textAlign: "center",
-		lineHeight: 19,
-		marginLeft: -10,
-		marginRight: 1,
-		marginTop: 5,
-	},
-	textFourText: {
-		color: "black",
-		fontSize: 11,
-		fontStyle: "normal",
-		fontWeight: "normal",
-		textAlign: "center",
-		lineHeight: 19,
-		marginLeft: -10,
-		backgroundColor: "transparent",
-		marginTop: 7,
-	},
 	group9View: {
 		position: "relative",
 		backgroundColor: "transparent",
@@ -659,8 +574,7 @@ const styles = StyleSheet.create({
 		width: 32,
 		height: 330,
 		marginLeft: 20,
-		marginRight: 8,
-		
+		marginRight: 8,	
 	},
 	rectangleTwoView: {
 		width: "100%",
@@ -893,7 +807,7 @@ const styles = StyleSheet.create({
 		width: adjustWidth(374),
 		height: adjustHeight(119)*1,
 		marginRight: 14,
-		marginBottom: 10,
+		marginBottom: "4%",
 		justifyContent: "center",
 	},
 	group15View: {
@@ -1025,7 +939,7 @@ const styles = StyleSheet.create({
 		height: adjustHeight(68),
 		alignItems: "center",
 		justifyContent: "center",
-		marginTop: "10%"
+		marginTop: "-20%"
 	},
 	backText: {
 		color: "rgb(252, 249, 249)",

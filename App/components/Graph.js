@@ -14,6 +14,7 @@ let adjustFont = (size)=> {
 	}
 }
 
+
 export default function Graph(props) {
   function calculateDate(i) {
     let d = props.data.date;
@@ -25,7 +26,7 @@ export default function Graph(props) {
         return '';
       } else {
         //console.log("d:" + d[i] + " t: " + t[i])
-        return d[i] + ' ' + t[i];
+        return d[i] + '\n' + t[i];
       }
     }
   }
@@ -43,13 +44,19 @@ export default function Graph(props) {
     <View style={styles.graphContainer}>
       <View style={styles.graphTopLevelView}>
         <View style={styles.yaxis}>
-          <Text> max </Text>
+          
           <Text style={styles.textYaxis}>15</Text>
-          <Text style={styles.textYaxis}> 10</Text>
+          <Text style={styles.textYaxis}></Text>
+          <Text style={styles.textYaxis}>12</Text>
+          <Text style={styles.textYaxis}>10</Text>
           <Text style={styles.textYaxis}>8</Text>
+          <Text style={styles.textYaxis}></Text>
           <Text style={styles.textYaxis}>5</Text>
+          <Text style={styles.textYaxis}></Text>
           <Text style={styles.textYaxis}>2</Text>
           <Text style={styles.textYaxis}>0</Text>
+          <Text style={styles.textYaxis}></Text>
+          <Text style={styles.textYaxis}> </Text>
         </View>
         <View style={styles.graphBackground}>
           <View style={styles.barHolder}>
@@ -66,7 +73,7 @@ export default function Graph(props) {
                   }}
                   locations={[0, 1]}
                   colors={['rgb(98, 54, 255)', 'rgb(184, 148, 242)']}
-                  style={[styles.bar, {height: adjustHeight(calculateHeight(item))}]}
+                  style={[styles.bar, {height: adjustHeight(calculateHeight(item/4))}]}
                 />
                 <View />
                 <Text style={styles.monText}> {calculateDate(index)} </Text>
@@ -116,7 +123,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     minWidth: 40,
     flexDirection: 'column',
-    justifyContent: 'center',
+    justifyContent: 'space-evenly',
     alignItems: 'center',
   },
   barHolder: {
