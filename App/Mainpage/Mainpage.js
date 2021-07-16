@@ -35,7 +35,7 @@ const keyForExit = 'Exit'
 const screenHeight = Dimensions.get('window').height;
 const screenWidth = Dimensions.get('window').width;
 
-let adjustHeight = (size)=> size*screenHeight/896
+let adjustHeight = (size)=> size*screenHeight/1000
 let adjustWidth = (size)=> size*screenWidth/414
 
 export default class Mainpage extends React.Component {
@@ -396,8 +396,10 @@ s
 				<View
 					pointerEvents="box-none"
 					style={{
+						backgroundColor: 'transparent',
 						flex: 3,
 						flexDirection: 'column',
+						adjustConetent: 'center',
 						height: 336,
 						marginLeft: 20,
 						marginRight: 40,
@@ -405,14 +407,14 @@ s
 					}}>
 						<ProgressCircle style={{ height: adjustHeight(340), marginTop: "4%", marginLeft: "1%" }}
 						 progress={this.completePortion()} progressColor={'rgb(109, 212, 0)'} >
-							</ProgressCircle>
+							
 					<View
 						pointerEvents="box-none"
 						style={{
-							position: "absolute",
-							left: 0,
+							
+						
 							width: 276,
-							top: 0,
+							
 							height: 192,
 							alignItems: "flex-start",
 						}}>
@@ -442,7 +444,7 @@ s
 								style={styles.titleText}> Time Left: </Text>
 							<View
 								style={{
-									flex: 1,
+									flex: 0.3,
 								}}/>
 							
 								<Text style={styles.titleText}> 
@@ -451,6 +453,8 @@ s
 						</View>
 						
 					</View>
+
+					</ProgressCircle>
 					
 					<View
 						pointerEvents="box-none"
@@ -638,17 +642,16 @@ const styles = StyleSheet.create({
 		backgroundColor: "transparent",
 	},
 	groupView: {
+		backgroundColor: "transparent",
 		flex: 1,
 		backgroundColor: "transparent",
 		alignSelf: "center",
 		width: 400,
 		height: 105,
-		marginTop: 63,
-		marginLeft: 60,
 		alignItems: "center",
+		marginTop: "10%",
 	},
 	titleText: {
-		backgroundColor: "transparent",
 		color: "white",
 		fontSize: adjustHeight(33)*adjustHeight(1),
 		fontStyle: "normal",
@@ -657,9 +660,7 @@ const styles = StyleSheet.create({
 		lineHeight: 45,
 		letterSpacing: 0.41,
 		alignSelf: "stretch",
-		marginLeft: 10,
-		marginRight: 1,
-		marginTop: 28,
+	
 	},
 	rectangleView: {
 		backgroundColor: "white",

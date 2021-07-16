@@ -11,6 +11,11 @@ import { Image, StyleSheet, Text, View } from "react-native"
 
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import Mainpage from "../../App/Mainpage/Mainpage"
+import { Dimensions} from 'react-native';
+
+const screenHeight = Dimensions.get('window').height;
+let adjustHeight = (size)=> size*screenHeight/896
+let adjustFont = (size)=> adjustHeight(size)*adjustHeight(1)
 
 export default class Home extends React.Component {
 
@@ -102,13 +107,13 @@ const styles = StyleSheet.create({
 	home2View: {
 		flexDirection: "column",
 		backgroundColor: "transparent",
-		height: 736,
+		height: "100%",
 		justifyContent: "center",
 	},
 	homeTwoView: {
 		flex: 1,
 		backgroundColor: "transparent",
-		height: 736,
+		height: "100%",
 		flexDirection: 'column',
 		alignItems: 'center',
 	},
@@ -116,12 +121,12 @@ const styles = StyleSheet.create({
 		backgroundColor: "transparent",
 		resizeMode: "cover",
 		width: null,
-		height: 810,
+		height: "100%",
 	},
 	creatimeText: {
 		backgroundColor: "transparent",
 		color: "white",
-		fontSize: 38.4,
+		fontSize: adjustFont(38.4),
 		fontStyle: "normal",
 		fontWeight: "normal",
 		textAlign: "center",
@@ -131,13 +136,13 @@ const styles = StyleSheet.create({
 		fontStyle: "normal",
 		backgroundColor: "transparent",
 		color: "white",
-		fontSize: 55,
+		fontSize: adjustFont(55),
 		fontWeight: "bold",
 		textAlign: "center",
 	},
 	keepYourFocusText: {
 		color: "white",
-		fontSize: 13,
+		fontSize: adjustFont(13),
 		fontStyle: "normal",
 		fontWeight: "normal",
 		textAlign: "center",

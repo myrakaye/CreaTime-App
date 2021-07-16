@@ -59,7 +59,7 @@ export default class Design00 extends React.Component {
 			date: [],
 			time: [],
 			//the length is stored in seconds!!
-			lengthList: [],
+			lengthList: [0,0,0,0,0,0,0],
 			//update number of times of complete from secure storage (previous sum of complete times)
 			complete: 0,
 			//update number of times of exit the app (only count when the time is not 0)
@@ -72,16 +72,27 @@ export default class Design00 extends React.Component {
 
 	async getValueDate() {
 		let value = await SecureStore.getItemAsync(keyForDate);
+		if(value == null) {
+			value = ["","","","","","",""]
+		}
 		console.log("Retreived Values: " + value )
 		return JSON.parse(value);
 	}
 	async getValueTime() {
 		let value = await SecureStore.getItemAsync(keyForTime);
+		if(value == null) {
+			value = ["","","","","","",""]
+		}
 		console.log("Retreived Values: " + value )
 		return JSON.parse(value);
 	}
 	async getValueLength() {
 		let value = await SecureStore.getItemAsync(keyForLength);
+		if(value == null) {
+			value = [0,0,0,0,0,0,0]
+			console.log("empty lengthlist")	
+		}
+
 		console.log("Retreived Values: " + value )
 		return JSON.parse(value);
 	}
@@ -153,11 +164,13 @@ export default class Design00 extends React.Component {
 
 	progressBarView(){
 		return {
+			flex: 1,
 			backgroundColor: "transparent",
-			width: 333*this.calculateConcentration(),
+			width: screenWidth*0.85*this.calculateConcentration(),
+			height: 50,
 			marginLeft: 0,
 			marginRight: -8,
-			marginTop: "8.5%",
+			marginTop: "2.5%",
 				
 		}
 	}
@@ -257,20 +270,19 @@ export default class Design00 extends React.Component {
 				<View
 					pointerEvents="box-none"
 					style={{
-						flex: 1,
-						height: 55,
+						flex: 4,
+						height: 100,
 						marginLeft: "4%",
-						marginTop: "5%",
+						marginTop: "4%",
 						flexDirection: "row",
 						alignItems: "flex-start",
 					}}>
 					<Text
 						style={styles.titleText}> {"Statistics"} </Text>
-					<View
-						style={{
-							flex: 1,
-						}}/>
 				</View>
+
+				
+
 				<View
 					pointerEvents="box-none"
 					style={{
@@ -278,15 +290,17 @@ export default class Design00 extends React.Component {
 						height: 59,
 						marginLeft: 20,
 						marginRight: 20,
-						marginTop: 12,
+						marginTop: "1%",
+						marginBottom: "5%",
 						flexDirection: "row",
 						alignItems: "flex-start",
 					}}>
 					<View
 						pointerEvents="box-none"
 						style={{
-							width: 197,
-							height: 59,
+							flex: 2,
+							width: 230,
+							height: 70
 						}}>
 						<Text
 							style={styles.averageProductivityText}> Average Focus Length </Text>
@@ -306,26 +320,36 @@ export default class Design00 extends React.Component {
 							style={styles.icDropNormalImage}/>
 					</View>
 				</View>
+
+				<View
+					style={{
+						flex: 1,
+					}}/>
+
 				{/* Make sure to validate empty arrays (so sessions)*/}
 				<Graph data= {{date: this.state.date, time: this.state.time, lengthList: this.state.lengthList}}/>
 
 				{/* Add blank view to seperate graphs */}
 				<View
 					style={{
-						flex: 3,
+						flex: 1,
 					}}/>
 
 				<View
 					style={styles.group18View}>
 					<View
 						style={styles.group15View}>
+						<View style={{flex: 2}}>
 						<Text
 							style={styles.yourConcentrationText}>YOUR CONCENTRATION</Text>
+						</View>
 						<View
 							pointerEvents="box-none"
 							style={{
+								backgroundColor:'transparent',
+								flex: 2,
 								width: 68,
-								height: 24,
+								height: 20,
 								marginLeft: 3,
 								marginTop: 1,
 								flexDirection: "row",
@@ -360,10 +384,12 @@ export default class Design00 extends React.Component {
 								
 							</View>
 
+
 						
 						<View
 							pointerEvents="box-none"
 							style={{
+								flex: 1,
 								alignSelf: "stretch",
 								height: 20,
 								marginRight: 4,
@@ -389,7 +415,7 @@ export default class Design00 extends React.Component {
 				</View>
 				<View
 					style={{
-						flex: 1,
+						flex: 3,
 					}}/>
 			
 				<View
@@ -435,7 +461,7 @@ const styles = StyleSheet.create({
 		fontStyle: "normal",
 		fontWeight: "normal",
 		textAlign: "left",
-		lineHeight: 45,
+		lineHeight: 80,
 		letterSpacing: 0.41,
 	},
 	group12Image: {
@@ -446,6 +472,7 @@ const styles = StyleSheet.create({
 		marginTop: 11,
 	},
 	averageProductivityText: {
+		flex: 1,
 		backgroundColor: "transparent",
 		color: "black",
 		fontSize: adjustFont(11),
@@ -453,21 +480,21 @@ const styles = StyleSheet.create({
 		fontWeight: "normal",
 		textAlign: "left",
 		lineHeight: 20,
-		position: "absolute",
+	
 		left: 2,
 		top: 0,
 	},
 	hPerWeekText: {
+		flex: 2.8,
 		backgroundColor: "transparent",
 		color: "black",
 		fontSize: adjustFont(25),
 		fontStyle: "normal",
 		fontWeight: "normal",
 		textAlign: "left",
-		lineHeight: 40,
-		position: "absolute",
-		left: 0,
-		top: 18,
+		lineHeight: 60,
+		left: '8%',
+
 	},
 	componentsButtonCoffePlaceView: {
 		backgroundColor: "white",
@@ -857,7 +884,7 @@ const styles = StyleSheet.create({
 		borderRadius: 25,
 		alignSelf: "flex-end",
 		width: adjustWidth(374),
-		height: adjustHeight(119),
+		height: adjustHeight(119)*1,
 		marginRight: 14,
 		
 		justifyContent: "center",
@@ -877,26 +904,29 @@ const styles = StyleSheet.create({
 		fontStyle: "normal",
 		fontWeight: "normal",
 		textAlign: "left",
-		lineHeight: 20,
-		marginLeft: 3,
+		height: 50,
+		marginLeft: "1%",
+		marginTop: "1%",
 	},
 	textEightText: {
 		color: "black",
-		fontSize: adjustFont(19),
+		fontSize: adjustFont(17),
 		fontStyle: "normal",
 		fontWeight: "normal",
 		textAlign: "left",
-		lineHeight: 22,
+		height: "100%",
+		width: "150%",
 		paddingTop: 1,
 		backgroundColor: "transparent",
 	},
 	highText: {
 		color: "rgba(0, 0, 0, 0.5)",
-		fontSize: adjustFont(13),
+		fontSize: adjustFont(11),
 		fontStyle: "normal",
 		fontWeight: "normal",
 		textAlign: "left",
-		lineHeight: 11,
+		height: "100%",
+		width: "100%",
 		paddingTop: 2,
 		backgroundColor: "transparent",
 		marginLeft: 7,
@@ -933,7 +963,7 @@ const styles = StyleSheet.create({
 		fontStyle: "normal",
 		fontWeight: "normal",
 		textAlign: "center",
-		lineHeight: 19,
+		height: "100%",
 	},
 	textTenText: {
 		backgroundColor: "transparent",
@@ -942,8 +972,8 @@ const styles = StyleSheet.create({
 		fontStyle: "normal",
 		fontWeight: "normal",
 		textAlign: "center",
-		lineHeight: 19,
-		marginLeft: 52,
+		height: "100%",
+		marginLeft: "16%",
 	},
 	textElevenText: {
 		color: "black",
@@ -951,9 +981,9 @@ const styles = StyleSheet.create({
 		fontStyle: "normal",
 		fontWeight: "normal",
 		textAlign: "center",
-		lineHeight: 19,
+		height: "100%",
 		backgroundColor: "transparent",
-		marginLeft: 83,
+		marginLeft: "26%",
 	},
 	textTwelveText: {
 		backgroundColor: "transparent",
@@ -962,8 +992,8 @@ const styles = StyleSheet.create({
 		fontStyle: "normal",
 		fontWeight: "normal",
 		textAlign: "center",
-		lineHeight: 19,
-		marginRight: 68,
+		height: "100%",
+		marginRight: "13%",
 	},
 	textThirteenText: {
 		backgroundColor: "transparent",
@@ -972,8 +1002,8 @@ const styles = StyleSheet.create({
 		fontStyle: "normal",
 		fontWeight: "normal",
 		textAlign: "center",
-		lineHeight: 19,
-		marginLeft: -20,
+		height: "100%",
+		marginRight: "-1%",
 	},
 	group6View: {
 		flex: 1,
@@ -989,7 +1019,7 @@ const styles = StyleSheet.create({
 	},
 	backText: {
 		color: "rgb(252, 249, 249)",
-		fontSize: adjustFont(13),
+		fontSize: adjustFont(12),
 		fontStyle: "normal",
 		fontWeight: "normal",
 		textAlign: "left",

@@ -1,6 +1,11 @@
 import * as React from 'react';
 import { Text, View, StyleSheet, Image } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import { Dimensions} from 'react-native';
+
+const screenHeight = Dimensions.get('window').height;
+let adjustHeight = (size)=> size*screenHeight/896
+let adjustFont = (size)=> adjustHeight(size)*adjustHeight(1)
 
 export default function Graph(props) {
   function calculateDate(i) {
@@ -48,7 +53,7 @@ export default function Graph(props) {
         </View>
         <View style={styles.graphBackground}>
           <View style={styles.barHolder}>
-            {props.data.lengthList.map((item, index) => {
+            { props.data.lengthList.map((item, index) => {
               return (<View style={styles.barAndLabelContainer}>
                 <LinearGradient
                   start={{
@@ -156,7 +161,7 @@ const styles = StyleSheet.create({
     opacity: 0.3,
     color: 'black',
     fontFamily: '.AppleSystemUIFont',
-    fontSize: 10,
+    fontSize: adjustFont(8),
     fontStyle: 'normal',
     fontWeight: 'normal',
     textAlign: 'center',
