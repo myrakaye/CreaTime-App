@@ -403,7 +403,7 @@ s
 						marginRight: 40,
 						marginTop: 61,
 					}}>
-						<ProgressCircle style={{ height: adjustHeight(340), marginTop: "4%", marginLeft: "1%"}}
+						<ProgressCircle style={{ height: adjustHeight(340), marginTop: "4%", marginLeft: "1%" }}
 						 progress={this.completePortion()} progressColor={'rgb(109, 212, 0)'} >
 							</ProgressCircle>
 					<View
@@ -630,8 +630,7 @@ const styles = StyleSheet.create({
 		
 		color: "white",
 		fontFamily: ".AppleSystemUIFont",
-		fontSize: adjustHeight(16)*adjustHeight(1),
-		//fontSize: RFPercentage(2),
+		fontSize: adjustHeight(16)**adjustHeight(1),
 		fontStyle: "normal",
 		fontWeight: "normal",
 		textAlign: "center",
@@ -651,11 +650,11 @@ const styles = StyleSheet.create({
 	titleText: {
 		backgroundColor: "transparent",
 		color: "white",
-		fontSize: RFValue(35),
+		fontSize: adjustHeight(33)**adjustHeight(1),
 		fontStyle: "normal",
 		fontWeight: "normal",
 		textAlign: "center",
-		//lineHeight: 45,
+		lineHeight: 45,
 		letterSpacing: 0.41,
 		alignSelf: "stretch",
 		marginLeft: 10,
@@ -748,8 +747,7 @@ const styles = StyleSheet.create({
 	},
 	nameText: {
 		color: "white",
-		fontSize: adjustHeight(18)*adjustHeight(1),
-		//fontSize: RFValue(15),
+		fontSize: adjustHeight(18)**adjustHeight(1),
 		fontStyle: "normal",
 		fontWeight: "normal",
 		textAlign: "center",
@@ -761,8 +759,7 @@ const styles = StyleSheet.create({
 	nameCopyText: {
 		backgroundColor: "transparent",
 		color: "white",
-		fontSize: adjustHeight(18)*adjustHeight(1),
-		//fontSize: RFValue(15),
+		fontSize: adjustHeight(18)**adjustHeight(1),
 		fontStyle: "normal",
 		fontWeight: "normal",
 		textAlign: "center",
@@ -782,8 +779,7 @@ const styles = StyleSheet.create({
 		backgroundColor: "transparent",
 		color: "rgb(31, 31, 55)",
 		fontFamily: ".AppleSystemUIFont",
-		fontSize: adjustHeight(18)*adjustHeight(1),
-		//fontSize: RFValue(18),
+		fontSize: adjustHeight(18)**adjustHeight(1),
 		fontStyle: "normal",
 		fontWeight: "normal",
 		textAlign: "center",

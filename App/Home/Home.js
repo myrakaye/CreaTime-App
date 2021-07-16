@@ -75,7 +75,7 @@ export default class Home extends React.Component {
 						<View 
 							style={{
 								flex: 1,
-								//position: "relative",
+								position: "relative",
 								width: '80%',
 								top: '60%',
 								height: 100,
@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
 	maskImage: {
 		backgroundColor: "transparent",
 		resizeMode: "cover",
-		width: "100%",
+		width: null,
 		height: "100%",
 	},
 	creatimeText: {
@@ -126,7 +126,6 @@ const styles = StyleSheet.create({
 		fontStyle: "normal",
 		fontWeight: "normal",
 		textAlign: "center",
-		//top: "10%",
 	},
 	startText: {
 		fontFamily: "Gill Sans",
@@ -134,7 +133,6 @@ const styles = StyleSheet.create({
 		backgroundColor: "transparent",
 		color: "white",
 		fontSize: RFPercentage(8),
-		//fontSize: 50,
 		fontWeight: "bold",
 		textAlign: "center",
 	},
@@ -146,6 +144,6 @@ const styles = StyleSheet.create({
 		textAlign: "center",
 		letterSpacing: 3.44,
 		backgroundColor: "transparent",
-		marginTop: '5%',
+		marginTop: '7%',
 	},
 })

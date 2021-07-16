@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Text, View, StyleSheet, Image } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { RFValue } from 'react-native-responsive-fontsize';
 
 export default function Graph(props) {
   function calculateDate(i) {
@@ -125,7 +124,7 @@ const styles = StyleSheet.create({
   },
   textYaxis: {
     color: 'black',
-    fontSize: RFValue(0.5),
+    fontSize: 11,
     fontStyle: 'normal',
     fontWeight: 'normal',
     textAlign: 'center',

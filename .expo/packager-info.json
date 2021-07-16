@@ -1,10 +1,10 @@
 {
   "devToolsPort": 19002,
-  "expoServerPort": 19000,
+  "expoServerPort": null,
   "packagerPort": 19000,
   "packagerPid": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null,
-  "webpackServerPort": null
+  "expoServerNgrokUrl": "https://h6-zar.anonymous.creatime-app.exp.direct",
+  "packagerNgrokUrl": "https://packager.h6-zar.anonymous.creatime-app.exp.direct",
+  "ngrokPid": 3263,
+  "webpackServerPort": 19006
 }
